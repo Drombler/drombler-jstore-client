@@ -58,17 +58,15 @@
     
     <dependencies>      
         <dependency>
-            <!-- Provides the sample -->
-            <groupId>org.drombler.jstore.client</groupId>
-            <artifactId>drombler-jstore-client-sample</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-discovery</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         
         <dependency>
-            <!-- Provides foo file support -->
-            <groupId>org.drombler.jstore.client</groupId>
-            <artifactId>drombler-jstore-client-foo</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-jap-support</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
