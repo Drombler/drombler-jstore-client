@@ -68,6 +68,8 @@
         <!--<url.parent>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url.parent>-->
 
         <drombler-fx.version>0.11</drombler-fx.version>
+        <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <feign.version>9.7.0</feign.version>
     </properties>
     
     <!-- Not inherited!?? -->
@@ -95,6 +97,33 @@
                 <version>${drombler-fx.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drombler.jstore.protocol</groupId>
+                <artifactId>drombler-jstore-protocol</artifactId>
+                <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
