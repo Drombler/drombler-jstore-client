@@ -4,15 +4,15 @@
     <parent>
         <groupId>org.drombler</groupId>
         <artifactId>drombler-oss-parent</artifactId>
-        <version>2.7</version>
+        <version>3.0-SNAPSHOT</version>
         <relativePath />
     </parent>
     <groupId>org.drombler.jstore.client</groupId>
     <artifactId>drombler-jstore-client-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
- 
-    <name>drombler-jstore-client-parent</name>
+
+    <name>Drombler JStore Client - Parent</name>
 
     <description>The parent POM of my drombler-jstore-client project. This drombler-jstore-client Parent POM should be the parent (either directly or indirectly) of every drombler-jstore-client project unless there is a good reason to do otherwise (in which case the reason should be documented).</description>
     <url>http://www.mycompany.com/drombler-jstore-client</url>
@@ -67,8 +67,9 @@
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
         <!--<url.parent>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url.parent>-->
 
-        <drombler-fx.version>0.11</drombler-fx.version>
+        <drombler-fx.version>0.12</drombler-fx.version>
         <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <drombler-jstore-client-protocol.version>0.1-SNAPSHOT</drombler-jstore-client-protocol.version>
         <feign.version>9.7.0</feign.version>
     </properties>
     
@@ -103,6 +104,12 @@
                 <groupId>org.drombler.jstore.protocol</groupId>
                 <artifactId>drombler-jstore-protocol</artifactId>
                 <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drombler.jstore.client.protocol</groupId>
+                <artifactId>drombler-jstore-client-protocol</artifactId>
+                <version>${drombler-jstore-client-protocol.version}</version>
             </dependency>
 
             <dependency>

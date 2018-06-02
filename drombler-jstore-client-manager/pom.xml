@@ -8,10 +8,10 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../drombler-jstore-client-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>drombler-jstore-client-integration-jstore</artifactId>
+    <artifactId>drombler-jstore-client-manager</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Drombler JStore Client - Integration - JStore</name>
+    <name>Drombler JStore Client - Manager</name>
 
     <!-- Not inherited!?? -->
     <prerequisites>
@@ -30,29 +30,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.drombler.jstore.protocol</groupId>
-            <artifactId>drombler-jstore-protocol</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.drombler.jstore.client.protocol</groupId>
             <artifactId>drombler-jstore-client-protocol</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
 
         <dependency>
@@ -75,6 +58,5 @@
             <artifactId>org.osgi.compendium</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 </project>

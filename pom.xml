@@ -10,7 +10,7 @@
     <artifactId>drombler-jstore-client</artifactId>
     <packaging>pom</packaging>
 
-    <name>drombler-jstore-client</name>
+    <name>Drombler JStore Client</name>
 
     <description>A Drombler JStore mock for testing purposes.</description>
     <inceptionYear>2018</inceptionYear>
@@ -47,6 +47,10 @@
     <modules>
         <module>drombler-jstore-client-parent</module>
         <module>drombler-jstore-client-application</module>
+        <module>drombler-jstore-client-branding</module>
+        <module>drombler-jstore-client-integration-jstore</module>
+        <module>drombler-jstore-client-integration-client-agent</module>
+        <module>drombler-jstore-client-manager</module>
         <module>drombler-jstore-client-discovery</module>
         <module>drombler-jstore-client-jap-support</module>
     </modules>

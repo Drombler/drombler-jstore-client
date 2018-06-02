@@ -11,7 +11,7 @@
     <artifactId>drombler-jstore-client-jap-support</artifactId>
     <packaging>bundle</packaging>
 
-    <name>drombler-jstore-client-jap-support</name>
+    <name>Drombler JStore Client - JAP Support</name>
 
     <!-- Not inherited!?? -->
     <prerequisites>
