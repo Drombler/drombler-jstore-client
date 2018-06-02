@@ -8,10 +8,10 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../drombler-jstore-client-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>drombler-jstore-client-jap-support</artifactId>
+    <artifactId>drombler-jstore-client-integration-client-agent</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Drombler JStore Client - JAP Support</name>
+    <name>Drombler JStore Client - Integration - Client Agent</name>
 
     <!-- Not inherited!?? -->
     <prerequisites>
@@ -34,28 +34,12 @@
             <artifactId>drombler-acp-core-action</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.drombler.acp</groupId>
-            <artifactId>drombler-acp-core-data</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.drombler.acp</groupId>
-            <artifactId>drombler-acp-core-data-spi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.drombler.acp</groupId>
-            <artifactId>drombler-acp-core-status</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.drombler.commons</groupId>
             <artifactId>drombler-commons-action-fx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.drombler.commons</groupId>
-            <artifactId>drombler-commons-action-command</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.drombler.commons</groupId>
-            <artifactId>drombler-commons-context</artifactId>
+            <artifactId>drombler-commons-action-context</artifactId>
         </dependency>
 
         <dependency>
