@@ -2,71 +2,75 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <!-- You might want to replace this parent with your Corporate POM (which might inherit from 
-        drombler-oss-parent or one of its parents in turn).
-        Run 'mvn help:effective-pom' on this parent project to get an idea what you need to configure. -->
         <groupId>org.drombler</groupId>
         <artifactId>drombler-oss-parent</artifactId>
-        <version>2.7-SNAPSHOT</version>
+        <version>3.0-SNAPSHOT</version>
         <relativePath />
     </parent>
     <groupId>org.drombler.jstore.client</groupId>
     <artifactId>drombler-jstore-client-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
- 
-    <name>drombler-jstore-client-parent</name>
+
+    <name>Drombler JStore Client - Parent</name>
 
     <description>The parent POM of my drombler-jstore-client project. This drombler-jstore-client Parent POM should be the parent (either directly or indirectly) of every drombler-jstore-client project unless there is a good reason to do otherwise (in which case the reason should be documented).</description>
     <url>http://www.mycompany.com/drombler-jstore-client</url>
-    <inceptionYear>2012</inceptionYear>
-    
-    <!-- Override the organization. 
-    Otherwise you would inherit the Drombler specific organization configuration, which wouldn't be correct.-->
-    <organization>
-        <name>My Company</name>
-        <url>http://www.mycompany.com</url>
-    </organization>
-    
-    <!-- Override the project licenses. 
-    Otherwise you would inherit the Drombler specific licenses configuration, which wouldn't be correct.-->
+    <inceptionYear>2018</inceptionYear>
+
+    <scm>
+        <connection>${scm.parent.connection}</connection>
+        <developerConnection>${scm.parent.developerConnection}</developerConnection>
+        <url>${scm.parent.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <licenses>
         <license>
-            <name>My License Name</name>
-            <url>../LICENSE.txt</url>
+            <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</name>
             <distribution>repo</distribution>
+            <!--<url>http://java.sun.com/spl.html</url>-->
+            <url>../LICENSE.txt</url>
         </license>
     </licenses>
-    
-    <!-- Override the project developers configuration. 
-    Otherwise you would inherit the Drombler specific developers configuration, which wouldn't be correct.-->
-    <developers>
-        <developer>
-            <id>someuser</id>
-            <name>Some Name</name>
-            <email>someuser@mycompany.com</email>
-            <url>http://www.mycompany.com/someuser</url>
-            <timezone>1</timezone>
-        </developer>
-    </developers>
 
-    <!-- Override the project scm configuration. 
-    Otherwise you would inherit the Drombler specific scm configuration, which wouldn't be correct.-->
-    <scm>
-        <connection>scm:hg:http://hg.mycompany.com/drombler-jstore-client</connection>
-        <developerConnection>scm:hg:ssh://puce77@hg.mycompany.com/drombler-jstore-client</developerConnection>
-        <url>http://hg.mycompany.com/drombler-jstore-client</url>
-    </scm>
-    
-    <!-- Override the project issueManagement configuration. 
-    Otherwise you would inherit the Drombler specific issueManagement configuration, which wouldn't be correct.-->
-    <issueManagement>
-        <system>My System</system>
-        <url>http://issues.mycompany.com/drombler-jstore-client</url>
-    </issueManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>drombler-nexus-snapshots</id>
+            <name>Drombler Nexus Snapshots Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>drombler-nexus-releases</id>
+            <name>Drombler Nexus Release Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <site>
+            <id>github</id>
+            <name>Drombler JStore Client</name>
+            <url>${distributionManagement.parent.url}/${project.artifactId}/</url>
+        </site>
+    </distributionManagement>
+
     
     <properties>
-        <drombler-fx.version>0.11</drombler-fx.version>
+        <scm.parent.connection>scm:git:https://github.com/Drombler/drombler-jstore-client.git</scm.parent.connection>
+        <scm.parent.developerConnection>scm:git:git@github.com:Drombler/drombler-jstore-client.git
+        </scm.parent.developerConnection>
+        <scm.parent.url>https://github.com/Drombler/drombler-jstore-client</scm.parent.url>
+        <!-- URLs to use with the standard site plugin with the git wagon -->
+        <distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore-client/${project.version}
+        </distributionManagement.base.url>
+        <distributionManagement.parent.url>${distributionManagement.base.url}/docs/site
+        </distributionManagement.parent.url>
+        <!-- URL to use with the GitHub site plugin -->
+        <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
+        <!--<url.parent>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url.parent>-->
+
+        <drombler-fx.version>0.12</drombler-fx.version>
+        <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <drombler-jstore-client-protocol.version>0.1-SNAPSHOT</drombler-jstore-client-protocol.version>
+        <feign.version>9.7.0</feign.version>
     </properties>
     
     <!-- Not inherited!?? -->
@@ -94,6 +98,39 @@
                 <version>${drombler-fx.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drombler.jstore.protocol</groupId>
+                <artifactId>drombler-jstore-protocol</artifactId>
+                <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drombler.jstore.client.protocol</groupId>
+                <artifactId>drombler-jstore-client-protocol</artifactId>
+                <version>${drombler-jstore-client-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

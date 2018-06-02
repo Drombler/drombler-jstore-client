@@ -7,21 +7,51 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>drombler-jstore-client-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>drombler-jstore-client-all</artifactId>
+    <artifactId>drombler-jstore-client</artifactId>
     <packaging>pom</packaging>
 
-    <name>drombler-jstore-client-all</name>
+    <name>Drombler JStore Client</name>
 
+    <description>A Drombler JStore mock for testing purposes.</description>
+    <inceptionYear>2018</inceptionYear>
+    <!-- required for Javadoc (apidocs) linking -->
+    <url>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url>
+
+    <scm>
+        <connection>${scm.connection}</connection>
+        <developerConnection>${scm.developerConnection}</developerConnection>
+        <url>${scm.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>${distributionManagement.parent.url}/</url>
+        </site>
+    </distributionManagement>
+
+    <properties>
+        <!-- Dev Environment Defaults -->
+        <scm.connection>scm:git:https://github.com/Drombler/drombler-jstore-client.git</scm.connection>
+        <scm.developerConnection>scm:git:git@github.com:Drombler/drombler-jstore-client.git</scm.developerConnection>
+        <scm.url>https://github.com/Drombler/drombler-jstore-client</scm.url>
+    </properties>
 
     <!-- Not inherited!?? -->
     <prerequisites>
         <maven>${maven.version}</maven>
     </prerequisites>
+
     
     <modules>
         <module>drombler-jstore-client-parent</module>
         <module>drombler-jstore-client-application</module>
-        <module>drombler-jstore-client-sample</module>
-        <module>drombler-jstore-client-foo</module>
+        <module>drombler-jstore-client-branding</module>
+        <module>drombler-jstore-client-integration-jstore</module>
+        <module>drombler-jstore-client-integration-client-agent</module>
+        <module>drombler-jstore-client-manager</module>
+        <module>drombler-jstore-client-discovery</module>
+        <module>drombler-jstore-client-jap-support</module>
     </modules>
 </project>

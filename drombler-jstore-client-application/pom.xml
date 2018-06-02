@@ -10,7 +10,7 @@
     <artifactId>drombler-jstore-client-application</artifactId>
     <packaging>drombler-fx-application</packaging>
 
-    <name>drombler-jstore-client-application</name>
+    <name>Drombler JStore Client - Application</name>
 
     <properties>
         <additionalExecArgs></additionalExecArgs>
@@ -46,7 +46,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <brandingId>drombler-jstore-client</brandingId>
-                    <title>MyApplication ${project.version}</title>
+                    <title>JStore ${project.version}</title>
                     <width>1500</width>
                     <height>1000</height>
                     <!--Uncomment the following line and specifcy an unused port to create a single instance application -->
@@ -58,17 +58,15 @@
     
     <dependencies>      
         <dependency>
-            <!-- Provides the sample -->
-            <groupId>org.drombler.jstore.client</groupId>
-            <artifactId>drombler-jstore-client-sample</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-discovery</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         
         <dependency>
-            <!-- Provides foo file support -->
-            <groupId>org.drombler.jstore.client</groupId>
-            <artifactId>drombler-jstore-client-foo</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-jap-support</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
