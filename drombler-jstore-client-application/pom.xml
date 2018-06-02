@@ -55,11 +55,25 @@
             </plugin>
         </plugins>
     </build>
-    
-    <dependencies>      
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-branding</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>drombler-jstore-client-discovery</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-manager</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
@@ -92,24 +106,6 @@
             <artifactId>drombler-fx-core-standard-status</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <!--  Provides a JavaFX based implementation of the Docking Framework for the content area of the classic
-            desktop application layout.
-            You could omit this dependency as long as it is a transitive dependency. 
-            (E.g. if you use a project such as drombler-jstore-client-sample, which provides some DockingPanes) 
-            You could also replace this with your own implementation of the ApplicationContentProvider and register
-            it as an OSGi service.-->
-            <groupId>org.drombler.fx</groupId>
-            <artifactId>drombler-fx-core-docking</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <!-- Provides the standard Docking Areas: left, right, top, bottom and editor
-            You could replace this with your own definition of these Docking Areas. -->
-            <groupId>org.drombler.acp</groupId>
-            <artifactId>drombler-acp-core-standard-docking</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         <!-- Provides the standard actions, toolbar buttons and menu items such as "Save" and "Save All" -->
         <dependency>
             <groupId>org.drombler.acp</groupId>
@@ -120,13 +116,6 @@
         <dependency>
             <groupId>org.drombler.acp</groupId>
             <artifactId>drombler-acp-core-standard-action-data-file</artifactId>
-            <scope>runtime</scope>
-        </dependency>  
-        <dependency>
-            <!-- Provides some localized resources. -->
-            <groupId>org.drombler.fx</groupId>
-            <artifactId>drombler-fx-l10n-all</artifactId>
-            <type>pom</type>
             <scope>runtime</scope>
         </dependency>
         
