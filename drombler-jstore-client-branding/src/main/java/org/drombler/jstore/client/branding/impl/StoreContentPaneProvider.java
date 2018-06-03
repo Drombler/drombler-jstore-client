@@ -16,6 +16,7 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class StoreContentPaneProvider implements ApplicationContentProvider, NavigationBarProvider {
+
     private final StoreContentPane contentPane = new StoreContentPane();
     @Reference
     private ContextManagerProvider contextManagerProvider;
@@ -23,6 +24,7 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
     private DeviceHandlerListProvider deviceHandlerListProvider;
 
     private ContextInjector contextInjector;
+
 
     @Activate
     protected void activate(ComponentContext context) {
@@ -36,8 +38,15 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
                 }
             }
         });
-        getNavigationBar().selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        getNavigationBar().selectedDeviceToggleProperty().addListener((observable, oldValue, newValue) -> {
             contextManagerProvider.getContextManager().setLocalContextActive(newValue);
+        });
+        getNavigationBar().selectedFeatureToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                contentPane.setCenter(((DeviceFeatureToggleButton) newValue).getData().getDeviceFeatureContent());
+            } else {
+                contentPane.setCenter(null);
+            }
         });
     }
 
@@ -56,4 +65,6 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
     public NavigationBar getNavigationBar() {
         return contentPane.getNavigationBar();
     }
+
+
 }

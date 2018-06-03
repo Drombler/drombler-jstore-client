@@ -73,7 +73,6 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
     private void saveIfUpdatedDuringInitialization() {
         boolean modified = deviceHandlers.stream().anyMatch(DeviceHandler::isModified);
         if (modified) {
-            System.out.println("Modified!!!!!");
             try {
                 writeContent();
             } catch (IOException e) {
