@@ -1,0 +1,17 @@
+{
+  "$id": "http://www.drombler.org/drombler-jstore-client/device-configurations.json",
+  "type": "object",
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "deviceConfigurations": {
+      "$id": "/properties/deviceConfigurations",
+      "type": "array",
+      "items": {
+        "$id": "/properties/deviceConfigurations/items",
+        "type": "object",
+        "$ref": "Definitions.json#/definitions/deviceConfiguration"
+      }
+    }
+  }
+}

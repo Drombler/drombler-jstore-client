@@ -8,10 +8,10 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../drombler-jstore-client-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>drombler-jstore-client-integration-jstore</artifactId>
+    <artifactId>drombler-jstore-client-data</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Drombler JStore Client - Integration - JStore</name>
+    <name>Drombler JStore Client - Data</name>
 
     <!-- Not inherited!?? -->
     <prerequisites>
@@ -30,31 +30,34 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.drombler.jstore.protocol</groupId>
-            <artifactId>drombler-jstore-protocol</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-model</artifactId>
+            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-integration-client-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-integration-jstore</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.drombler.jstore.client.protocol</groupId>
             <artifactId>drombler-jstore-client-protocol</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
+            <groupId>org.drombler.acp</groupId>
+            <artifactId>drombler-acp-core-data</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
+            <groupId>org.drombler.acp</groupId>
+            <artifactId>drombler-acp-core-data-spi</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-slf4j</artifactId>
-        </dependency>
-        <!--<dependency>-->
-        <!--&lt;!&ndash;its dependencies don't provide OSGi meta data, yet&ndash;&gt;-->
-        <!--<groupId>io.github.openfeign</groupId>-->
-        <!--<artifactId>feign-okhttp</artifactId>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.osgi</groupId>
@@ -68,14 +71,9 @@
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>osgi.core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
+
 </project>

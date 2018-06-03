@@ -46,6 +46,8 @@
     
     <modules>
         <module>drombler-jstore-client-parent</module>
+        <module>drombler-jstore-client-model</module>
+        <module>drombler-jstore-client-data</module>
         <module>drombler-jstore-client-application</module>
         <module>drombler-jstore-client-branding</module>
         <module>drombler-jstore-client-integration-jstore</module>
