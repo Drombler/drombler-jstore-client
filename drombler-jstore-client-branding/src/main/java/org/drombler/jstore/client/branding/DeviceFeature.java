@@ -18,4 +18,6 @@ public @interface DeviceFeature {
      * @return the position to order the menus in a parent menu/ menu bar
      */
     int position();
+
+    boolean selected() default false;
 }

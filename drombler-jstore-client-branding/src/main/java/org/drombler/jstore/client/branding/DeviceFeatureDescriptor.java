@@ -30,6 +30,10 @@ public class DeviceFeatureDescriptor<T> implements Positionable {
         this.selected = selected;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
     /**
      * @return the deviceFeatureContentClass
      */
@@ -37,6 +41,9 @@ public class DeviceFeatureDescriptor<T> implements Positionable {
         return deviceFeatureContentClass;
     }
 
+    public T getDeviceFeatureContent() {
+        return deviceFeatureContent;
+    }
 
     /**
      * @return the position
@@ -46,6 +53,11 @@ public class DeviceFeatureDescriptor<T> implements Positionable {
         return position;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+
     public static DeviceFeatureDescriptor<?> createDeviceFeatureDescriptor(DeviceFeatureType deviceFeature, ContextManager contextManager, ContextInjector contextInjector, Bundle bundle) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Class<?> deviceFeatureContentClass = loadClass(bundle, deviceFeature.getDeviceFeatureContentClass());
         return createDeviceFeatureDescriptor(deviceFeature, deviceFeatureContentClass, contextManager, contextInjector);
@@ -54,7 +66,7 @@ public class DeviceFeatureDescriptor<T> implements Positionable {
     private static <T> DeviceFeatureDescriptor<T> createDeviceFeatureDescriptor(DeviceFeatureType deviceFeature, Class<T> deviceFeatureContentClass, ContextManager contextManager, ContextInjector contextInjector) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         T deviceFeatureContent = createDeviceFeatureContent(deviceFeatureContentClass, contextManager, contextInjector);
         String displayName = ResourceBundleUtils.getClassResourceStringPrefixed(deviceFeatureContentClass, deviceFeature.getDisplayName());
-        return new DeviceFeatureDescriptor<T>(displayName, deviceFeatureContentClass, deviceFeatureContent, deviceFeature.getPosition(), deviceFeature.isSelected());
+        return new DeviceFeatureDescriptor<>(displayName, deviceFeatureContentClass, deviceFeatureContent, deviceFeature.getPosition(), deviceFeature.isSelected());
     }
 
     private static <T> T createDeviceFeatureContent(Class<T> deviceFeatureContentClass, ContextManager contextManager, ContextInjector contextInjector) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -62,4 +74,6 @@ public class DeviceFeatureDescriptor<T> implements Positionable {
         Contexts.configureObject(deviceFeatureContent, contextManager, contextInjector);
         return deviceFeatureContent;
     }
+
+
 }

@@ -36,6 +36,7 @@ public class DeviceFeatureAnnotationProcessor extends AbstractApplicationAnnotat
         DeviceFeatureType deviceFeature = new DeviceFeatureType();
         deviceFeature.setDisplayName(deviceFeatureAnnotation.displayName());
         deviceFeature.setPosition(deviceFeatureAnnotation.position());
+        deviceFeature.setSelected(deviceFeatureAnnotation.selected());
         deviceFeature.setDeviceFeatureContentClass(element.asType().toString());
         deviceFeatures.getDeviceFeature().add(deviceFeature);
     }

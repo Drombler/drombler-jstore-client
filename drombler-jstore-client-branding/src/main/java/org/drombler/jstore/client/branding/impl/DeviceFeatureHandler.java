@@ -105,8 +105,8 @@ public class DeviceFeatureHandler {
     private <T extends Node> void registerDeviceFeatureInitialized(DeviceFeatureDescriptor<T> deviceFeatureDescriptor) {
         applicationThreadExecutorProvider.getApplicationThreadExecutor().execute(() -> {
             NavigationBar navigationBar = navigationBarProvider.getNavigationBar();
-            int insertionPoint = Positionables.getInsertionPoint(navigationBar.getDeviceFeatures(), deviceFeatureDescriptor);
-            navigationBar.getDeviceFeatures().add(insertionPoint, deviceFeatureDescriptor);
+            int insertionPoint = Positionables.getInsertionPoint(navigationBar.getFeatures(), deviceFeatureDescriptor);
+            navigationBar.getFeatures().add(insertionPoint, deviceFeatureDescriptor);
         });
     }
 

@@ -16,11 +16,6 @@ import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
 import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
 import org.drombler.jstore.client.data.DeviceHandler;
-import org.drombler.jstore.client.model.json.DeviceConfiguration;
-import org.drombler.jstore.client.protocol.json.Store;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NavigationBar extends GridPane {
     @FXML
@@ -30,17 +25,17 @@ public class NavigationBar extends GridPane {
     @FXML
     private HBox deviceHBox;
     @FXML
-    private HBox deviceFeatureHBox;
+    private HBox featureHBox;
     //    @FXML
 //    private DataToggleButton<Device> myComputerButton;
     @FXML
     private MenuButton deviceMenuButton;
 
     private final ObservableList<DeviceHandler> devices = FXCollections.observableArrayList();
-    private final ObservableList<DeviceFeatureDescriptor<? extends Node>> deviceFeatures = FXCollections.observableArrayList();
+    private final ObservableList<DeviceFeatureDescriptor<? extends Node>> features = FXCollections.observableArrayList();
 
     private final ToggleGroup deviceToggleGroup = new ToggleGroup();
-    private final ToggleGroup deviceFeatureToggleGroup = new ToggleGroup();
+    private final ToggleGroup featureToggleGroup = new ToggleGroup();
 
     public NavigationBar() {
         FXMLLoaders.loadRoot(this);
@@ -58,41 +53,42 @@ public class NavigationBar extends GridPane {
                 }
             }
         });
+
+        CollectionBindings.bindContent(featureHBox.getChildren(), features, DeviceFeatureToggleButton::new);
+        CollectionBindings.bindContent(featureToggleGroup.getToggles(), featureHBox.getChildren(), DeviceFeatureToggleButton.class::cast);
+        featureToggleGroup.getToggles().addListener((ListChangeListener<Toggle>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    change.getAddedSubList().stream()
+                            .map(DeviceFeatureToggleButton.class::cast)
+                            .filter(deviceFeatureToggleButton -> deviceFeatureToggleButton.getData().isSelected())
+                            .findAny() // there should be max. one
+                            .ifPresent(featureToggleGroup::selectToggle);
+                }
+            }
+        });
+
     }
 
 
-    // TODO: read from deviceConfigurations.json file
-    private DeviceConfiguration getMyComupterDeviceConfiguration() {
-        DeviceConfiguration myComputerDeviceConfiguration = new DeviceConfiguration();
-        myComputerDeviceConfiguration.setDisplayName("myComputer");
-        myComputerDeviceConfiguration.setPort(42731);
-        return myComputerDeviceConfiguration;
-    }
-
-    // TODO: get stores from device
-    private List<Store> getStores() {
-        Store store = new Store();
-        store.setId("jstore");
-        store.setDisplayName("JStore");
-        store.setEndpoint("http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/webresources");
-        List<Store> stores = new ArrayList<>();
-        stores.add(store);
-        return stores;
-    }
 
     public ObservableList<DeviceHandler> getDevices() {
         return devices;
     }
 
-    public ObservableList<DeviceFeatureDescriptor<? extends Node>> getDeviceFeatures() {
-        return deviceFeatures;
+    public ObservableList<DeviceFeatureDescriptor<? extends Node>> getFeatures() {
+        return features;
     }
 
     public ObservableList<Toggle> getDeviceToggles() {
         return deviceToggleGroup.getToggles();
     }
 
-    public ReadOnlyObjectProperty<Toggle> selectedToggleProperty() {
+    public ReadOnlyObjectProperty<Toggle> selectedDeviceToggleProperty() {
         return deviceToggleGroup.selectedToggleProperty();
+    }
+
+    public ReadOnlyObjectProperty<Toggle> selectedFeatureToggleProperty() {
+        return featureToggleGroup.selectedToggleProperty();
     }
 }

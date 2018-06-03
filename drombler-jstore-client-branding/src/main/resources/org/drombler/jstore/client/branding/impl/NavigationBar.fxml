@@ -30,7 +30,7 @@
             </MenuButton>
          </children>
       </HBox>
-      <HBox fx:id="deviceFeatureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"/>
+      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"/>
    </children>
 </fx:root>
 

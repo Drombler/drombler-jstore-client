@@ -38,8 +38,15 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
                 }
             }
         });
-        getNavigationBar().selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        getNavigationBar().selectedDeviceToggleProperty().addListener((observable, oldValue, newValue) -> {
             contextManagerProvider.getContextManager().setLocalContextActive(newValue);
+        });
+        getNavigationBar().selectedFeatureToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                contentPane.setCenter(((DeviceFeatureToggleButton) newValue).getData().getDeviceFeatureContent());
+            } else {
+                contentPane.setCenter(null);
+            }
         });
     }
 
