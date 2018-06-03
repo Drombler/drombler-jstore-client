@@ -11,7 +11,7 @@ import org.drombler.jstore.client.data.DeviceHandler;
 
 import java.util.Objects;
 
-@DeviceFeature(displayName = "Update", position = 50)
+@DeviceFeature(displayName = "%displayName", position = 50)
 public class UpdateFeatureContentPane extends BorderPane implements ActiveContextSensitive {
     private Context activeContext;
     private DeviceHandler device;

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Toggle;
@@ -13,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
-import org.drombler.jstore.client.branding.DeviceFeature;
+import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
 import org.drombler.jstore.client.data.DeviceHandler;
 import org.drombler.jstore.client.model.json.DeviceConfiguration;
 import org.drombler.jstore.client.protocol.json.Store;
@@ -36,7 +37,7 @@ public class NavigationBar extends GridPane {
     private MenuButton deviceMenuButton;
 
     private final ObservableList<DeviceHandler> devices = FXCollections.observableArrayList();
-    private final ObservableList<DeviceFeature> deviceFeatures = FXCollections.observableArrayList();
+    private final ObservableList<DeviceFeatureDescriptor<? extends Node>> deviceFeatures = FXCollections.observableArrayList();
 
     private final ToggleGroup deviceToggleGroup = new ToggleGroup();
     private final ToggleGroup deviceFeatureToggleGroup = new ToggleGroup();
@@ -83,7 +84,7 @@ public class NavigationBar extends GridPane {
         return devices;
     }
 
-    public ObservableList<DeviceFeature> getDeviceFeatures() {
+    public ObservableList<DeviceFeatureDescriptor<? extends Node>> getDeviceFeatures() {
         return deviceFeatures;
     }
 
