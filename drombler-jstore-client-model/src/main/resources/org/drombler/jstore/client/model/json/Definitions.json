@@ -1,0 +1,54 @@
+{
+  "$id": "http://www.drombler.org/drombler-jstore-protocol/Definitions.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "definitions": {
+    "deviceConfiguration": {
+      "$id": "/definitions/deviceConfiguration",
+      "type": "object",
+      "title": "A device access configuration",
+      "description": "The access configuration for a JStore Client Agent.",
+      "properties": {
+        "id": {
+          "$id": "/definitions/deviceConfiguration/properties/name",
+          "type": "string",
+          "title": "The unique configuration id",
+          "description": "The unique id of this configuration.",
+          "default": "",
+          "examples": [
+            "<UUID>"
+          ]
+        },
+        "displayName": {
+          "$id": "/definitions/deviceConfiguration/properties/displayName",
+          "type": "string",
+          "title": "The configuration display name",
+          "description": "The name of this configuration to display to the user.",
+          "default": "",
+          "examples": [
+            "myComputer"
+          ]
+        },
+        "host": {
+          "$id": "/definitions/deviceConfiguration/properties/host",
+          "type": "string",
+          "title": "The host",
+          "description": "The host of the JStore Client Agent.",
+          "default": "",
+          "examples": [
+            "<IP Address>"
+          ]
+        },
+        "port": {
+          "$id": "/definitions/deviceConfiguration/properties/port",
+          "type": "integer",
+          "title": "The port",
+          "description": "The port of the JStore Client Agent.",
+          "examples": [
+            42731
+          ]
+        }
+      }
+    }
+  }
+}

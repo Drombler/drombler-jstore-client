@@ -3,7 +3,6 @@ package org.drombler.jstore.client.integration.store.impl;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 import org.drombler.fx.startup.main.DromblerFXConfiguration;
 import org.drombler.jstore.client.integration.store.StoreRestClient;
@@ -32,7 +31,7 @@ public class StoreRestClientProviderImpl implements StoreRestClientProvider {
                 .encoder(new JacksonEncoder())
                 .decoder(new JacksonDecoder())
                 .logger(new Slf4jLogger())
-                .client(new OkHttpClient())
+//                .client(new OkHttpClient())
                 .target(StoreRestClient.class, store.getEndpoint());
 
     }

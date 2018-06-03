@@ -1,8 +1,0 @@
-{
-  "stores": [
-    {
-      "storeId": "jstore",
-      "endpoint": "http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/webresources"
-    }
-  ]
-}

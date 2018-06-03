@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.manager;
+package org.drombler.jstore.client.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
