@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import org.drombler.acp.core.data.spi.DataHandlerRegistryProvider;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.fx.startup.main.DromblerFXConfiguration;
+import org.drombler.jstore.client.integration.store.StoreRestClientRegistryProvider;
 import org.drombler.jstore.client.model.ObjectMapperProvider;
 import org.drombler.jstore.client.model.json.DeviceConfigurations;
 import org.osgi.service.component.ComponentContext;
@@ -31,6 +32,8 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
     @Reference
     private ObjectMapperProvider objectMapperProvider;
     @Reference
+    private StoreRestClientRegistryProvider storeRestClientRegistryProvider;
+    @Reference
     private DataHandlerRegistryProvider dataHandlerRegistryProvider;
 
     private DeviceConfigurations deviceConfigurations;
@@ -44,6 +47,7 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
         makeSureDeviceConfigurationsFileExists();
         this.deviceConfigurations = readContent();
         deviceHandlers.addAll(getInitialDeviceList());
+        deviceHandlers.forEach(DeviceHandler::connect);
         CollectionBindings.bindContent(deviceConfigurations.getDeviceConfigurations(), deviceHandlers, DeviceHandler::getDeviceConfiguration);
         saveIfUpdatedDuringInitialization();
         deviceHandlers.addListener((ListChangeListener<DeviceHandler>) change -> {
@@ -93,7 +97,7 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
     private List<DeviceHandler> getInitialDeviceList() {
         return this.deviceConfigurations.getDeviceConfigurations().stream()
                 .map(deviceConfiguration -> {
-                    DeviceHandler deviceHandler = new DeviceHandler(deviceConfiguration, objectMapperProvider.getObjectMapper());
+                    DeviceHandler deviceHandler = new DeviceHandler(deviceConfiguration, objectMapperProvider.getObjectMapper(), storeRestClientRegistryProvider.getStoreRestClientRegistry());
                     dataHandlerRegistryProvider.getDataHandlerRegistry().registerDataHandler(deviceHandler);
                     return deviceHandler;
                 })

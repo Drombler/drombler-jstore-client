@@ -28,13 +28,17 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
 
     @Activate
     protected void activate(ComponentContext context) {
-        Bindings.bindContentBidirectional(getNavigationBar().getDevices(), deviceHandlerListProvider.getDeviceHandlers());
         getNavigationBar().getDeviceToggles().addListener((ListChangeListener<Toggle>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     change.getRemoved().forEach(contextManagerProvider.getContextManager()::removeLocalContext);
                 } else if (change.wasAdded()) {
-                    change.getAddedSubList().forEach(contextManagerProvider.getContextManager()::putLocalContext);
+                    change.getAddedSubList().stream()
+                            .map(DeviceToggleButton.class::cast)
+                            .forEach(deviceToggleButton -> {
+                                contextManagerProvider.getContextManager().putLocalContext(deviceToggleButton);
+                                deviceToggleButton.setSelected(deviceToggleButton.getData().isMyComputer());
+                            });
                 }
             }
         });
@@ -48,6 +52,7 @@ public class StoreContentPaneProvider implements ApplicationContentProvider, Nav
                 contentPane.setCenter(null);
             }
         });
+        Bindings.bindContentBidirectional(getNavigationBar().getDevices(), deviceHandlerListProvider.getDeviceHandlers());
     }
 
 
