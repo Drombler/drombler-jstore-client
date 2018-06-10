@@ -40,22 +40,6 @@ public class NavigationBar extends GridPane {
     public NavigationBar() {
         FXMLLoaders.loadRoot(this);
 
-        CollectionBindings.bindContent(deviceHBox.getChildren(), devices, DeviceToggleButton::new);
-        CollectionBindings.bindContent(deviceToggleGroup.getToggles(), deviceHBox.getChildren(), DeviceToggleButton.class::cast);
-        deviceToggleGroup.getToggles().addListener((ListChangeListener<Toggle>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    change.getAddedSubList().stream()
-                            .map(DeviceToggleButton.class::cast)
-                            .filter(deviceToggleButton -> deviceToggleButton.getData().isMyComputer())
-                            .findAny()
-                            .ifPresent(deviceToggleGroup::selectToggle);
-                }
-            }
-        });
-
-        CollectionBindings.bindContent(featureHBox.getChildren(), features, DeviceFeatureToggleButton::new);
-        CollectionBindings.bindContent(featureToggleGroup.getToggles(), featureHBox.getChildren(), DeviceFeatureToggleButton.class::cast);
         featureToggleGroup.getToggles().addListener((ListChangeListener<Toggle>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -68,6 +52,11 @@ public class NavigationBar extends GridPane {
             }
         });
 
+        CollectionBindings.bindContent(deviceHBox.getChildren(), devices, DeviceToggleButton::new);
+        CollectionBindings.bindContent(deviceToggleGroup.getToggles(), deviceHBox.getChildren(), DeviceToggleButton.class::cast);
+
+        CollectionBindings.bindContent(featureHBox.getChildren(), features, DeviceFeatureToggleButton::new);
+        CollectionBindings.bindContent(featureToggleGroup.getToggles(), featureHBox.getChildren(), DeviceFeatureToggleButton.class::cast);
     }
 
 

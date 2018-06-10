@@ -49,6 +49,10 @@
             <artifactId>drombler-jstore-client-protocol</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.drombler.jstore.protocol</groupId>
+            <artifactId>drombler-jstore-protocol</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.drombler.commons</groupId>
             <artifactId>drombler-commons-context</artifactId>
         </dependency>
