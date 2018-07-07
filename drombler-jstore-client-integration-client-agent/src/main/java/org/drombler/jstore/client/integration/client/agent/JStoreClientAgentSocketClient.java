@@ -1,16 +1,15 @@
 package org.drombler.jstore.client.integration.client.agent;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.drombler.jstore.protocol.json.SelectedApplication;
-import org.drombler.jstore.protocol.json.Store;
-import org.drombler.jstore.protocol.json.ApplicationId;
-import org.drombler.jstore.protocol.json.SystemInfo;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import org.drombler.jstore.protocol.json.ApplicationId;
+import org.drombler.jstore.protocol.json.SelectedApplication;
+import org.drombler.jstore.protocol.json.Store;
+import org.drombler.jstore.protocol.json.SystemInfo;
 
 public class JStoreClientAgentSocketClient implements AutoCloseable {
     private Socket socket;
