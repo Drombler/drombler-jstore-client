@@ -12,7 +12,8 @@ import org.drombler.jstore.client.integration.client.agent.JStoreClientAgentSock
 import org.drombler.jstore.client.integration.store.StoreRestClient;
 import org.drombler.jstore.client.integration.store.StoreRestClientRegistry;
 import org.drombler.jstore.client.model.json.DeviceConfiguration;
-import org.drombler.jstore.client.protocol.json.Store;
+import org.drombler.jstore.protocol.json.Store;
+import org.drombler.jstore.protocol.json.SystemInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

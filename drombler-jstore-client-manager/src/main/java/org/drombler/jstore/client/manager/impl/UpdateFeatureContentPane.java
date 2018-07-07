@@ -11,10 +11,7 @@ import org.drombler.commons.fx.scene.control.RenderedListCellFactory;
 import org.drombler.jstore.client.branding.DeviceFeature;
 import org.drombler.jstore.client.data.DeviceHandler;
 import org.drombler.jstore.client.integration.store.StoreRestClient;
-import org.drombler.jstore.protocol.json.ApplicationId;
-import org.drombler.jstore.protocol.json.ApplicationVersionInfo;
-import org.drombler.jstore.protocol.json.ApplicationVersionSearchRequest;
-import org.drombler.jstore.protocol.json.ApplicationVersionSearchResponse;
+import org.drombler.jstore.protocol.json.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,11 +25,11 @@ public class UpdateFeatureContentPane extends BorderPane implements ActiveContex
     private DeviceHandler device;
 
     @FXML
-    private ListView<ApplicationVersionInfo> updateListView;
+    private ListView<UpgradableApplication> updateListView;
 
     public UpdateFeatureContentPane() {
         FXMLLoaders.loadRoot(this);
-        updateListView.setCellFactory(new RenderedListCellFactory<>(new ApplicationVersionInfoRenderer()));
+        updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableApplicationRenderer()));
     }
 
     @Override
@@ -58,17 +55,18 @@ public class UpdateFeatureContentPane extends BorderPane implements ActiveContex
     }
 
     private void refreshUpdateListView() {
-        List<ApplicationId> applicationIds = device.getJStoreClientAgentSocketClient().getSelectedApplications();
-        LOGGER.debug("ApplicationIds: {}", applicationIds);
+        List<SelectedApplication> selectedApplications = device.getJStoreClientAgentSocketClient().getSelectedApplications();
+        LOGGER.debug("SelectedApplications: {}", selectedApplications);
         List<StoreRestClient> storeRestClients = device.getStoreRestClients();
         storeRestClients.forEach(storeRestClient -> {
             ApplicationVersionSearchRequest request = new ApplicationVersionSearchRequest();
-            request.setApplicationIds(applicationIds);
+            request.setSelectedApplications(selectedApplications);
+            request.setSystemInfo(device.getJStoreClientAgentSocketClient().getSystemInfo());
             // TODO: split per store
             ApplicationVersionSearchResponse response = storeRestClient.startApplicationVersionSearch(request);
-            List<ApplicationVersionInfo> applicationVersionInfos = response.getApplicationVersionInfos();
-            LOGGER.debug("ApplicationVersionInfos: {}", applicationVersionInfos);
-            updateListView.getItems().addAll(applicationVersionInfos);
+            List<UpgradableApplication> upgradableApplications = response.getUpgradableApplications();
+            LOGGER.debug("UpgradableApplications: {}", upgradableApplications);
+            updateListView.getItems().addAll(upgradableApplications);
         });
     }
 

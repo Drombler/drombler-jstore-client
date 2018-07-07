@@ -4,7 +4,7 @@ import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
-import org.drombler.jstore.client.protocol.json.Store;
+import org.drombler.jstore.protocol.json.Store;
 
 import java.util.HashMap;
 import java.util.HashSet;
