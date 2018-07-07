@@ -1,6 +1,6 @@
 package org.drombler.jstore.client.manager;
 
-import org.drombler.jstore.client.protocol.json.Store;
+import org.drombler.jstore.protocol.json.Store;
 
 import java.util.List;
 

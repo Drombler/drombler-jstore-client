@@ -1,14 +1,15 @@
 package org.drombler.jstore.client.integration.client.agent;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.drombler.jstore.client.protocol.json.Store;
-import org.drombler.jstore.protocol.json.ApplicationId;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import org.drombler.jstore.protocol.json.ApplicationId;
+import org.drombler.jstore.protocol.json.SelectedApplication;
+import org.drombler.jstore.protocol.json.Store;
+import org.drombler.jstore.protocol.json.SystemInfo;
 
 public class JStoreClientAgentSocketClient implements AutoCloseable {
     private Socket socket;
@@ -42,21 +43,37 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
         stores.add(store);
         return stores;
     }
+
+    public SystemInfo getSystemInfo() {
+        // TODO: get from device
+        SystemInfo systemInfo = new SystemInfo();
+        systemInfo.setOsName(System.getProperty("os.name"));
+        systemInfo.setOsArch(System.getProperty("os.arch"));
+        systemInfo.setOsVersion(System.getProperty("os.version"));
+        return systemInfo;
+    }
     // addStore()
     // removeStore()
 
-    public List<ApplicationId> getSelectedApplications() {
+    public List<SelectedApplication> getSelectedApplications() {
         // TODO: get from device
-        List<ApplicationId> applicationIds = new ArrayList<>();
-        ApplicationId jstoreClientService = new ApplicationId();
-        jstoreClientService.setVendorId("drombler");
-        jstoreClientService.setVendorApplicationId("drombler-jstore-client-service");
-        applicationIds.add(jstoreClientService);
-        ApplicationId jstoreClient = new ApplicationId();
-        jstoreClient.setVendorId("drombler");
-        jstoreClient.setVendorApplicationId("drombler-jstore-client");
-        applicationIds.add(jstoreClient);
-        return applicationIds;
+        List<SelectedApplication> selectedApplications = new ArrayList<>();
+        SelectedApplication jstoreClientAgent = new SelectedApplication();
+        ApplicationId jstoreClientAgentApplicationId = new ApplicationId();
+        jstoreClientAgentApplicationId.setGroupId("org.drombler.jstore.client.agent");
+        jstoreClientAgentApplicationId.setArtifactId("drombler-jstore-client-agent-application");
+
+        jstoreClientAgent.setApplicationId(jstoreClientAgentApplicationId);
+        selectedApplications.add(jstoreClientAgent);
+
+        SelectedApplication jstoreClient = new SelectedApplication();
+        ApplicationId jstoreClientApplicationId = new ApplicationId();
+        jstoreClientApplicationId.setGroupId("org.drombler.jstore.client");
+        jstoreClientApplicationId.setArtifactId("drombler-jstore-client-application");
+
+        jstoreClient.setApplicationId(jstoreClientApplicationId);
+        selectedApplications.add(jstoreClient);
+        return selectedApplications;
     }
     // addSelectedApplication()
     // removeSelectedApplication()
@@ -67,4 +84,6 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
     public void close() throws IOException {
         socket.close();
     }
+
+
 }

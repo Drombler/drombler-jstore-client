@@ -10,7 +10,7 @@ public interface StoreRestClient {
     @RequestLine("GET /actuator/info")
     String ping();
 
-    @RequestLine("POST /v1/application-version-search")
+    @RequestLine("POST /v1/managed-components/application-version-search")
     @Headers("Content-Type: application/json")
     ApplicationVersionSearchResponse startApplicationVersionSearch(ApplicationVersionSearchRequest request);
 
