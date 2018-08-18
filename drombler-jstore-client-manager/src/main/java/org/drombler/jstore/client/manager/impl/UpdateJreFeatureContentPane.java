@@ -19,17 +19,17 @@ import java.util.List;
 import java.util.Objects;
 
 @DeviceFeature(displayName = "%displayName", position = 50, selected = true)
-public class UpdateFeatureContentPane extends BorderPane implements ActiveContextSensitive {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateFeatureContentPane.class);
+public class UpdateJreFeatureContentPane extends BorderPane implements ActiveContextSensitive {
+    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateJreFeatureContentPane.class);
     private Context activeContext;
     private DeviceHandler device;
 
     @FXML
-    private ListView<UpgradableApplication> updateListView;
+    private ListView<UpgradableJRE> updateListView;
 
-    public UpdateFeatureContentPane() {
+    public UpdateJreFeatureContentPane() {
         FXMLLoaders.loadRoot(this);
-        updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableApplicationRenderer()));
+        updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableJreRenderer()));
     }
 
     @Override
@@ -55,18 +55,18 @@ public class UpdateFeatureContentPane extends BorderPane implements ActiveContex
     }
 
     private void refreshUpdateListView() {
-        List<SelectedApplication> selectedApplications = device.getJStoreClientAgentSocketClient().getSelectedApplications();
-        LOGGER.debug("SelectedApplications: {}", selectedApplications);
+        List<SelectedJRE> selectedJREs = device.getJStoreClientAgentSocketClient().getSelectedJREs();
+        LOGGER.debug("SelectedJREs: {}", selectedJREs);
         List<StoreRestClient> storeRestClients = device.getStoreRestClients();
         storeRestClients.forEach(storeRestClient -> {
-            ApplicationVersionSearchRequest request = new ApplicationVersionSearchRequest();
-            request.setSelectedApplications(selectedApplications);
+            JreVersionSearchRequest request = new JreVersionSearchRequest();
+            request.setSelectedJREs(selectedJREs);
             request.setSystemInfo(device.getJStoreClientAgentSocketClient().getSystemInfo());
             // TODO: split per store
-            ApplicationVersionSearchResponse response = storeRestClient.startApplicationVersionSearch(request);
-            List<UpgradableApplication> upgradableApplications = response.getUpgradableApplications();
-            LOGGER.debug("UpgradableApplications: {}", upgradableApplications);
-            updateListView.getItems().addAll(upgradableApplications);
+            JreVersionSearchResponse response = storeRestClient.startJreVersionSearchResponse(request);
+            List<UpgradableJRE> upgradableJREs = response.getUpgradableJREs();
+            LOGGER.debug("UpgradableJREs: {}", upgradableJREs);
+            updateListView.getItems().addAll(upgradableJREs);
         });
     }
 

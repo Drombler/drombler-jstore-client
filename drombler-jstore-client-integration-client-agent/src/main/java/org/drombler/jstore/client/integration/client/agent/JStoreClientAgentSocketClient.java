@@ -6,10 +6,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import org.drombler.jstore.protocol.json.ApplicationId;
-import org.drombler.jstore.protocol.json.SelectedApplication;
-import org.drombler.jstore.protocol.json.Store;
-import org.drombler.jstore.protocol.json.SystemInfo;
+import org.drombler.jstore.protocol.json.*;
 
 public class JStoreClientAgentSocketClient implements AutoCloseable {
     private Socket socket;
@@ -79,6 +76,27 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
     // removeSelectedApplication()
 
     //...
+
+    public List<SelectedJRE> getSelectedJREs() {
+        // TODO: get from device
+        List<SelectedJRE> selectedJREs = new ArrayList<>();
+        SelectedJRE jre8 = new SelectedJRE();
+        JreInfo jre8Info = new JreInfo();
+        jre8Info.setJavaSpecificationVersion("8");
+        jre8Info.setJreVendorId("oracle");
+        jre8.setJreInfo(jre8Info);
+        jre8.setInstalledImplementationVersion("8u171-b11");
+        selectedJREs.add(jre8);
+
+        SelectedJRE jre10 = new SelectedJRE();
+        JreInfo jre10Info = new JreInfo();
+        jre10Info.setJavaSpecificationVersion("10");
+        jre10Info.setJreVendorId("oracle");
+        jre10.setJreInfo(jre10Info);
+        selectedJREs.add(jre10);
+
+        return selectedJREs;
+    }
 
     @Override
     public void close() throws IOException {
