@@ -67,9 +67,8 @@
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
         <!--<url.parent>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url.parent>-->
 
-        <drombler-fx.version>0.12</drombler-fx.version>
-        <drombler-commons.version>0.13-SNAPSHOT</drombler-commons.version>
-        <drombler-jstore-protocol.version>0.3-SNAPSHOT</drombler-jstore-protocol.version>
+        <drombler-fx.version>0.13</drombler-fx.version>
+        <drombler-jstore-protocol.version>0.3</drombler-jstore-protocol.version>
         <feign.version>9.7.0</feign.version>
     </properties>
     
@@ -92,15 +91,6 @@
     
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <!--TODO: remove once Drombler FX is updated-->
-                <groupId>org.drombler.commons</groupId>
-                <artifactId>drombler-commons</artifactId>
-                <version>${drombler-commons.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <dependency>
                 <groupId>org.drombler.fx</groupId>
                 <artifactId>drombler-fx</artifactId>
