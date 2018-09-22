@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.drombler</groupId>
+        <artifactId>drombler-oss-parent</artifactId>
+        <version>3.1</version>
+        <relativePath />
+    </parent>
+    <groupId>org.drombler.jstore.client</groupId>
+    <artifactId>drombler-jstore-client-parent</artifactId>
+    <version>0.1</version>
+    <packaging>pom</packaging>
+
+    <name>Drombler JStore Client - Parent</name>
+
+    <description>The parent POM of my drombler-jstore-client project. This drombler-jstore-client Parent POM should be the parent (either directly or indirectly) of every drombler-jstore-client project unless there is a good reason to do otherwise (in which case the reason should be documented).</description>
+    <url>http://www.mycompany.com/drombler-jstore-client</url>
+    <inceptionYear>2018</inceptionYear>
+
+    <scm>
+        <connection>${scm.parent.connection}</connection>
+        <developerConnection>${scm.parent.developerConnection}</developerConnection>
+        <url>${scm.parent.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</name>
+            <distribution>repo</distribution>
+            <!--<url>http://java.sun.com/spl.html</url>-->
+            <url>../LICENSE.txt</url>
+        </license>
+    </licenses>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>drombler-nexus-snapshots</id>
+            <name>Drombler Nexus Snapshots Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>drombler-nexus-releases</id>
+            <name>Drombler Nexus Release Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <site>
+            <id>github</id>
+            <name>Drombler JStore Client</name>
+            <url>${distributionManagement.parent.url}/${project.artifactId}/</url>
+        </site>
+    </distributionManagement>
+
+    
+    <properties>
+        <scm.parent.connection>scm:git:https://github.com/Drombler/drombler-jstore-client.git</scm.parent.connection>
+        <scm.parent.developerConnection>scm:git:git@github.com:Drombler/drombler-jstore-client.git
+        </scm.parent.developerConnection>
+        <scm.parent.url>https://github.com/Drombler/drombler-jstore-client</scm.parent.url>
+        <!-- URLs to use with the standard site plugin with the git wagon -->
+        <distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore-client/${project.version}
+        </distributionManagement.base.url>
+        <distributionManagement.parent.url>${distributionManagement.base.url}/docs/site
+        </distributionManagement.parent.url>
+        <!-- URL to use with the GitHub site plugin -->
+        <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
+        <!--<url.parent>http://www.drombler.org/drombler-jstore-mock/${project.version}/docs/site</url.parent>-->
+
+        <drombler-fx.version>0.13</drombler-fx.version>
+        <drombler-jstore-protocol.version>0.3</drombler-jstore-protocol.version>
+        <feign.version>9.7.0</feign.version>
+    </properties>
+    
+    <!-- Not inherited!?? -->
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>  
+                    <groupId>org.drombler.fx</groupId>
+                    <artifactId>drombler-fx-maven-plugin</artifactId>
+                    <version>${drombler-fx.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.drombler.fx</groupId>
+                <artifactId>drombler-fx</artifactId>
+                <version>${drombler-fx.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.drombler.jstore.protocol</groupId>
+                <artifactId>drombler-jstore-protocol</artifactId>
+                <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

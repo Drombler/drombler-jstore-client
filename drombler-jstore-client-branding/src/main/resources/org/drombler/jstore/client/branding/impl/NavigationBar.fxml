@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.171"
+         xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="NEVER"/>
+      <ColumnConstraints hgrow="SOMETIMES"/>
+      <ColumnConstraints hgrow="ALWAYS"/>
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints vgrow="NEVER"/>
+   </rowConstraints>
+   <children>
+      <HBox GridPane.hgrow="NEVER">
+         <children>
+            <Button fx:id="backButton" disable="true" mnemonicParsing="false" text="&lt;"/>
+            <Button fx:id="forwardButton" disable="true" mnemonicParsing="false" text="&gt;"/>
+         </children>
+      </HBox>
+      <HBox fx:id="deviceHBox" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES">
+         <children>
+            <MenuButton fx:id="deviceMenuButton" mnemonicParsing="false" text="...">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1"/>
+                  <MenuItem mnemonicParsing="false" text="Action 2"/>
+               </items>
+            </MenuButton>
+         </children>
+      </HBox>
+      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"/>
+   </children>
+</fx:root>
+

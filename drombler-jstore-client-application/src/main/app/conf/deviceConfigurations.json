@@ -1,0 +1,8 @@
+{
+  "deviceConfigurations": [
+    {
+      "displayName": "myComputer",
+      "port": 42731
+    }
+  ]
+}
