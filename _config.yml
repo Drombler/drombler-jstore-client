@@ -1,5 +1,4 @@
 title: Drombler JStore Client
-description: A JavaFX-based rich client, which manages multiple remote Drombler JStore Client Agents and allows the user to discover new applications in Drombler JStore.
 google_analytics:
 show_downloads: false
 theme: jekyll-theme-slate
