@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+        COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Notice
+
+The contents of this file are subject to the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License. A copy of the License is available at
+http://www.opensource.org/licenses/cddl1.txt
+
+The Original Code is Drombler.org. The Initial Developer of the
+Original Code is Florian Brunner (Sourceforge.net user: puce).
+Copyright 2012 Drombler.org. All Rights Reserved.
+
+Contributor(s): .
+-->
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.drombler.commons.fx.scene.control.*?>
+<?import org.drombler.fx.core.action.*?>
+
+<?import org.drombler.jstore.client.branding.impl.StoreContentPane?>
+<?import org.drombler.jstore.client.branding.impl.NavigationBar?>
+<fx:root type="GridPane" xmlns:fx="http://javafx.com/fxml">
+    <MenuBar GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" fx:id="menuBar"/>
+    <BorderPane GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" fx:id="contentPane"/>
+    <StatusBar GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" fx:id="statusBar"/>
+</fx:root>
+
