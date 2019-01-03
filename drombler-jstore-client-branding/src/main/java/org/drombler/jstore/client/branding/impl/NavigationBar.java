@@ -1,23 +1,32 @@
 package org.drombler.jstore.client.branding.impl;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
 import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
+import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialog;
 import org.drombler.jstore.client.data.DeviceHandler;
+import org.keycloak.OAuthErrorException;
+import org.keycloak.adapters.ServerRequest;
+import org.keycloak.adapters.installed.desktop.KeycloakInstalledDesktop;
+import org.keycloak.common.VerificationException;
+import org.keycloak.representations.AccessToken;
 
 public class NavigationBar extends GridPane {
+
     @FXML
     private Button backButton;
     @FXML
@@ -30,6 +39,9 @@ public class NavigationBar extends GridPane {
 //    private DataToggleButton<Device> myComputerButton;
     @FXML
     private MenuButton deviceMenuButton;
+
+    @FXML
+    private Hyperlink loginLink;
 
     private final ObservableList<DeviceHandler> devices = FXCollections.observableArrayList();
     private final ObservableList<DeviceFeatureDescriptor<? extends Node>> features = FXCollections.observableArrayList();
@@ -59,8 +71,6 @@ public class NavigationBar extends GridPane {
         CollectionBindings.bindContent(featureToggleGroup.getToggles(), featureHBox.getChildren(), DeviceFeatureToggleButton.class::cast);
     }
 
-
-
     public ObservableList<DeviceHandler> getDevices() {
         return devices;
     }
@@ -79,5 +89,35 @@ public class NavigationBar extends GridPane {
 
     public ReadOnlyObjectProperty<Toggle> selectedFeatureToggleProperty() {
         return featureToggleGroup.selectedToggleProperty();
+    }
+
+    /**
+     * See: https://www.keycloak.org/docs/latest/securing_apps/index.html#_installed_adapter
+     *
+     * @param event
+     * @throws VerificationException
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ServerRequest.HttpFailure
+     * @throws URISyntaxException
+     * @throws OAuthErrorException
+     */
+    public void login(ActionEvent event) throws VerificationException, IOException, InterruptedException, ServerRequest.HttpFailure, URISyntaxException, OAuthErrorException {
+        // reads the configuration from classpath: META-INF/keycloak.json
+        KeycloakInstalledDesktop keycloak = new KeycloakInstalledDesktop(NavigationBar.class.getResourceAsStream("/META-INF/keycloak.json"));
+        keycloak.setLocale(Locale.getDefault(Locale.Category.DISPLAY));
+
+        KeycloakLoginDialog loginDialog = new KeycloakLoginDialog();
+        boolean successful = loginDialog.login(keycloak);
+
+        if (successful) {
+            AccessToken token = keycloak.getToken();
+// use token to send backend request
+
+// ensure token is valid for at least 30 seconds
+            long minValidity = 30L;
+            String tokenString = keycloak.getTokenString(minValidity, TimeUnit.SECONDS);
+            System.out.println(tokenString);
+        }
     }
 }

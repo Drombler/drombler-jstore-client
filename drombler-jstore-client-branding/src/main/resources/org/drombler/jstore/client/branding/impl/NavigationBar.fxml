@@ -9,6 +9,7 @@
       <ColumnConstraints hgrow="NEVER"/>
       <ColumnConstraints hgrow="SOMETIMES"/>
       <ColumnConstraints hgrow="ALWAYS"/>
+      <ColumnConstraints hgrow="NEVER"/>
    </columnConstraints>
    <rowConstraints>
       <RowConstraints vgrow="NEVER"/>
@@ -31,6 +32,7 @@
          </children>
       </HBox>
       <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"/>
+      <Hyperlink fx:id="loginLink" text="%loginLink.text" onAction="#login"/>
    </children>
 </fx:root>
 
