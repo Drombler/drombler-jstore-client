@@ -4,6 +4,7 @@ import feign.Headers;
 import feign.RequestLine;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchRequest;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchResponse;
+import org.drombler.jstore.protocol.json.CreateVendorRequest;
 import org.drombler.jstore.protocol.json.JreVersionSearchRequest;
 import org.drombler.jstore.protocol.json.JreVersionSearchResponse;
 
@@ -18,6 +19,10 @@ public interface StoreRestClient {
 
     @RequestLine("POST /v1/managed-components/jre-version-search")
     @Headers("Content-Type: application/json")
-    JreVersionSearchResponse startJreVersionSearchResponse(JreVersionSearchRequest request);
+    JreVersionSearchResponse startJreVersionSearch(JreVersionSearchRequest request);
+    
+    @RequestLine("POST /v1/vendors")
+    @Headers("Content-Type: application/json")
+    void createVendor(CreateVendorRequest request);
 
 }

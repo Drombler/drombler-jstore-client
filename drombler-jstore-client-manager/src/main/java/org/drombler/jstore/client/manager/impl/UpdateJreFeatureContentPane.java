@@ -63,7 +63,7 @@ public class UpdateJreFeatureContentPane extends BorderPane implements ActiveCon
             request.setSelectedJREs(selectedJREs);
             request.setSystemInfo(device.getJStoreClientAgentSocketClient().getSystemInfo());
             // TODO: split per store
-            JreVersionSearchResponse response = storeRestClient.startJreVersionSearchResponse(request);
+            JreVersionSearchResponse response = storeRestClient.startJreVersionSearch(request);
             List<UpgradableJRE> upgradableJREs = response.getUpgradableJREs();
             LOGGER.debug("UpgradableJREs: {}", upgradableJREs);
             updateListView.getItems().addAll(upgradableJREs);
