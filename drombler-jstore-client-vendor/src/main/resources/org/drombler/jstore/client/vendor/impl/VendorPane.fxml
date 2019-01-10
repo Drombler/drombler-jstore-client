@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -33,6 +34,9 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="%vendorIdField.tooltip.text" wrapText="true" />
+         </tooltip>
       </TextField>
       <Label fx:id="nameLabel" text="%nameLabel.text" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
@@ -58,16 +62,25 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="%nameField.tooltip.text" wrapText="true" />
+         </tooltip>
       </TextField>
       <TextField fx:id="registrationEmailAddressField" promptText="%registrationEmailAddressField.promptText" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="%registrationEmailAddressField.tooltip.text" wrapText="true" />
+         </tooltip>
       </TextField>
       <TextField fx:id="customerContactEmailAddressField" promptText="%customerContactEmailAddressField.promptText" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="%customerContactEmailAddressField.tooltip.text" wrapText="true" />
+         </tooltip>
       </TextField>
       <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
@@ -87,6 +100,9 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
+         <tooltip>
+            <Tooltip text="%namespacesListView.tooltip.text" wrapText="true" />
+         </tooltip>
       </ListView>
    </children>
 </fx:root>
