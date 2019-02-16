@@ -2,6 +2,7 @@
 
 package org.drombler.jstore.client.jap.impl;
 
+import java.nio.file.Path;
 import javafx.event.ActionEvent;
 import org.drombler.acp.core.action.Action;
 import org.drombler.acp.core.action.MenuEntry;
@@ -12,8 +13,6 @@ import org.drombler.commons.client.dialog.FileChooserProvider;
 import org.drombler.commons.data.Openable;
 import org.drombler.commons.fx.concurrent.FXConsumer;
 import org.osgi.util.tracker.ServiceTracker;
-
-import java.nio.file.Path;
 
 
 @Action(id = "jap-install", category = "jstore", displayName = "%jap-install.displayName", accelerator = "Shortcut+I")
@@ -47,7 +46,7 @@ public class JapInstallAction extends AbstractFXAction implements AutoCloseable 
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         dataHandlerRegistryServiceTracker.close();
     }
 
