@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,7 +14,7 @@
    <columnConstraints>
       <ColumnConstraints hgrow="NEVER" />
       <ColumnConstraints hgrow="SOMETIMES" />
-      <ColumnConstraints hgrow="ALWAYS" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
       <ColumnConstraints hgrow="NEVER" />
    </columnConstraints>
    <rowConstraints>
@@ -36,7 +37,11 @@
             </MenuButton>
          </children>
       </HBox>
-      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" />
-      <Hyperlink fx:id="loginLink" onAction="#login" text="%loginLink.text" GridPane.columnIndex="3" GridPane.hgrow="NEVER" />
+      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
+      <BorderPane fx:id="loginPane" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+         <center>
+            <Hyperlink fx:id="loginLink" onAction="#login" text="%loginLink.text" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </fx:root>

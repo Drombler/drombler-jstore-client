@@ -12,8 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import org.drombler.commons.client.util.ResourceBundleUtils;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
 import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
@@ -25,8 +27,11 @@ import org.keycloak.adapters.ServerRequest;
 import org.keycloak.adapters.installed.desktop.KeycloakInstalledDesktop;
 import org.keycloak.common.VerificationException;
 import org.keycloak.representations.AccessToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NavigationBar extends GridPane {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NavigationBar.class);
 
     @FXML
     private Button backButton;
@@ -40,6 +45,9 @@ public class NavigationBar extends GridPane {
 //    private DataToggleButton<Device> myComputerButton;
     @FXML
     private MenuButton deviceMenuButton;
+
+    @FXML
+    private BorderPane loginPane;
 
     @FXML
     private Hyperlink loginLink;
@@ -119,6 +127,7 @@ public class NavigationBar extends GridPane {
         boolean loginSuccessful = loginDialogDisplayer.showLoginDialog(getScene().getWindow());
 
         if (loginSuccessful) {
+            loginPane.setCenter(createMenuButton());
             AccessToken token = keycloak.getToken();
 // use token to send backend request
 
@@ -126,16 +135,33 @@ public class NavigationBar extends GridPane {
             long minValidity = 30L;
             String tokenString = keycloak.getTokenString(minValidity, TimeUnit.SECONDS);
             System.out.println(tokenString);
-            logout();
         }
     }
 
-    private void logout() throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
-
+    private void logout(ActionEvent event) throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
+        loginPane.setCenter(loginLink);
         boolean logoutSuccessful = logoutDialogDisplayer.showLogoutDialog(getScene().getWindow());
 
         if (logoutSuccessful) {
             System.out.println("logged out!");
         }
+    }
+
+    private MenuButton createMenuButton() {
+        MenuButton menuButton = new MenuButton(keycloak.getToken().getGivenName() + " " + keycloak.getToken().getFamilyName());
+        menuButton.getItems().add(createLogoutMenuItem());
+        return menuButton;
+    }
+
+    private MenuItem createLogoutMenuItem() {
+        MenuItem logoutMenuItem = new MenuItem(ResourceBundleUtils.getClassResourceStringPrefixed(NavigationBar.class, "%logoutMenuItem.text"));
+        logoutMenuItem.setOnAction(e -> {
+            try {
+                logout(e);
+            } catch (VerificationException | IOException | ServerRequest.HttpFailure | InterruptedException | URISyntaxException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
+        });
+        return logoutMenuItem;
     }
 }
