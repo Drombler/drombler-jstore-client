@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<fx:root type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.171"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root hgap="5.0" type="javafx.scene.layout.GridPane" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
-      <ColumnConstraints hgrow="NEVER"/>
-      <ColumnConstraints hgrow="SOMETIMES"/>
-      <ColumnConstraints hgrow="ALWAYS"/>
-      <ColumnConstraints hgrow="NEVER"/>
+      <ColumnConstraints hgrow="NEVER" />
+      <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="ALWAYS" />
+      <ColumnConstraints hgrow="NEVER" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints vgrow="NEVER"/>
+      <RowConstraints vgrow="NEVER" />
    </rowConstraints>
    <children>
       <HBox GridPane.hgrow="NEVER">
          <children>
-            <Button fx:id="backButton" disable="true" mnemonicParsing="false" text="&lt;"/>
-            <Button fx:id="forwardButton" disable="true" mnemonicParsing="false" text="&gt;"/>
+            <Button fx:id="backButton" disable="true" mnemonicParsing="false" text="&lt;" />
+            <Button fx:id="forwardButton" disable="true" mnemonicParsing="false" text="&gt;" />
          </children>
       </HBox>
       <HBox fx:id="deviceHBox" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES">
          <children>
             <MenuButton fx:id="deviceMenuButton" mnemonicParsing="false" text="...">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1"/>
-                  <MenuItem mnemonicParsing="false" text="Action 2"/>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
             </MenuButton>
          </children>
       </HBox>
-      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS"/>
-      <Hyperlink fx:id="loginLink" text="%loginLink.text" onAction="#login"/>
+      <HBox fx:id="featureHBox" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" />
+      <Hyperlink fx:id="loginLink" onAction="#login" text="%loginLink.text" GridPane.columnIndex="3" GridPane.hgrow="NEVER" />
    </children>
 </fx:root>
-
