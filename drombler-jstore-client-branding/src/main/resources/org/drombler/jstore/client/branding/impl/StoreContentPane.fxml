@@ -2,9 +2,14 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import org.drombler.jstore.client.branding.impl.NavigationBar?>
+<?import com.jfoenix.controls.JFXDrawer?>
+
 <fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <top>
         <NavigationBar fx:id="navigationBar"></NavigationBar>
     </top>
+    <left>
+        <JFXDrawer fx:id="drawer" direction="LEFT" />
+    </left>
 </fx:root>

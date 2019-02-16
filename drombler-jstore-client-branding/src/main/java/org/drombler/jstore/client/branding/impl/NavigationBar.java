@@ -1,15 +1,13 @@
 package org.drombler.jstore.client.branding.impl;
 
+import com.jfoenix.controls.JFXHamburger;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
@@ -18,6 +16,10 @@ import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
 import org.drombler.jstore.client.data.DeviceHandler;
 
 public class NavigationBar extends GridPane {
+
+    @FXML
+    private JFXHamburger burger;
+
     @FXML
     private Button backButton;
     @FXML
@@ -57,9 +59,8 @@ public class NavigationBar extends GridPane {
 
         CollectionBindings.bindContent(featureHBox.getChildren(), features, DeviceFeatureToggleButton::new);
         CollectionBindings.bindContent(featureToggleGroup.getToggles(), featureHBox.getChildren(), DeviceFeatureToggleButton.class::cast);
+
     }
-
-
 
     public ObservableList<DeviceHandler> getDevices() {
         return devices;
