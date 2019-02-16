@@ -19,15 +19,15 @@ import java.util.List;
 import java.util.Objects;
 
 @DeviceFeature(displayName = "%displayName", position = 50, selected = true)
-public class UpdateJreFeatureContentPane extends BorderPane implements ActiveContextSensitive {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateJreFeatureContentPane.class);
+public class UpdateJreDeviceFeatureContentPane extends BorderPane implements ActiveContextSensitive {
+    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateJreDeviceFeatureContentPane.class);
     private Context activeContext;
     private DeviceHandler device;
 
     @FXML
     private ListView<UpgradableJRE> updateListView;
 
-    public UpdateJreFeatureContentPane() {
+    public UpdateJreDeviceFeatureContentPane() {
         FXMLLoaders.loadRoot(this);
         updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableJreRenderer()));
     }

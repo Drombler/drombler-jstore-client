@@ -21,4 +21,9 @@ Contributor(s): .
             <jxb:class name="DeviceFeaturesType"/>
         </jxb:bindings> 
     </jxb:bindings>
+    <jxb:bindings schemaLocation="applicationFeatures.xsd" node="/xs:schema">
+        <jxb:bindings  node="//xs:element[@name='applicationFeatures']">
+            <jxb:class name="ApplicationFeaturesType"/>
+        </jxb:bindings> 
+    </jxb:bindings>
 </jxb:bindings>
