@@ -17,7 +17,8 @@ import javafx.scene.layout.HBox;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
 import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
-import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialog;
+import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialogDisplayer;
+import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLogoutDialogDisplayer;
 import org.drombler.jstore.client.data.DeviceHandler;
 import org.keycloak.OAuthErrorException;
 import org.keycloak.adapters.ServerRequest;
@@ -49,8 +50,19 @@ public class NavigationBar extends GridPane {
     private final ToggleGroup deviceToggleGroup = new ToggleGroup();
     private final ToggleGroup featureToggleGroup = new ToggleGroup();
 
+    private final KeycloakInstalledDesktop keycloak;
+    private final KeycloakLoginDialogDisplayer loginDialogDisplayer;
+    private final KeycloakLogoutDialogDisplayer logoutDialogDisplayer;
+
     public NavigationBar() {
         FXMLLoaders.loadRoot(this);
+
+        // reads the configuration from classpath: META-INF/keycloak.json
+        this.keycloak = new KeycloakInstalledDesktop(NavigationBar.class.getResourceAsStream("/META-INF/keycloak.json"));
+        this.keycloak.setLocale(Locale.getDefault(Locale.Category.DISPLAY));
+
+        this.loginDialogDisplayer = new KeycloakLoginDialogDisplayer(keycloak);
+        this.logoutDialogDisplayer = new KeycloakLogoutDialogDisplayer(keycloak);
 
         featureToggleGroup.getToggles().addListener((ListChangeListener<Toggle>) change -> {
             while (change.next()) {
@@ -102,15 +114,11 @@ public class NavigationBar extends GridPane {
      * @throws URISyntaxException
      * @throws OAuthErrorException
      */
-    public void login(ActionEvent event) throws VerificationException, IOException, InterruptedException, ServerRequest.HttpFailure, URISyntaxException, OAuthErrorException {
-        // reads the configuration from classpath: META-INF/keycloak.json
-        KeycloakInstalledDesktop keycloak = new KeycloakInstalledDesktop(NavigationBar.class.getResourceAsStream("/META-INF/keycloak.json"));
-        keycloak.setLocale(Locale.getDefault(Locale.Category.DISPLAY));
+    public void login(ActionEvent event) throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
 
-        KeycloakLoginDialog loginDialog = new KeycloakLoginDialog();
-        boolean successful = loginDialog.login(keycloak);
+        boolean loginSuccessful = loginDialogDisplayer.showLoginDialog(getScene().getWindow());
 
-        if (successful) {
+        if (loginSuccessful) {
             AccessToken token = keycloak.getToken();
 // use token to send backend request
 
@@ -118,6 +126,16 @@ public class NavigationBar extends GridPane {
             long minValidity = 30L;
             String tokenString = keycloak.getTokenString(minValidity, TimeUnit.SECONDS);
             System.out.println(tokenString);
+            logout();
+        }
+    }
+
+    private void logout() throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
+
+        boolean logoutSuccessful = logoutDialogDisplayer.showLogoutDialog(getScene().getWindow());
+
+        if (logoutSuccessful) {
+            System.out.println("logged out!");
         }
     }
 }
