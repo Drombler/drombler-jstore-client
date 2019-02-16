@@ -12,7 +12,7 @@ import org.drombler.commons.fx.fxml.FXMLLoaders;
  *
  * @author puce
  */
-public class KeycloakLoginPane extends GridPane {
+public class KeycloakTaskPane extends GridPane {
 
     @FXML
     private Label messageLabel;
@@ -20,7 +20,7 @@ public class KeycloakLoginPane extends GridPane {
     @FXML
     private ProgressBar progressBar;
 
-    public KeycloakLoginPane() {
+    public KeycloakTaskPane() {
         FXMLLoaders.loadRoot(this);
     }
 

@@ -75,7 +75,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-installed-desktop-adapter</artifactId>
-            <version>4.7.0.Final-SNAPSHOT</version>
+            <version>4.8.3.Final-SNAPSHOT</version>
         </dependency>
         <!--        <dependency>
             <groupId>javax.json</groupId>

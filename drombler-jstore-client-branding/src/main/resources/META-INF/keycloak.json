@@ -2,7 +2,7 @@
     "realm": "drombler-staging",
     "auth-server-url": "http://localhost:8070/auth",
     "ssl-required": "external",
-    "resource": "keycloak-client-tester",
+    "resource": "jstore-client",
     "public-client": true,
     "use-resource-role-mappings": true
 }
