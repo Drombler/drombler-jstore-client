@@ -6,5 +6,5 @@ It manages multiple remote [Drombler JStore Client Agents](https://github.com/Dr
 
 For more information see the [documentation](http://www.drombler.org/drombler-jstore-client).
 
-You can get the binary from the [latest release](https://github.com/Drombler/drombler-jstore-client/releases/latest).
+You can get the binary from the [latest release](https://github.com/Drombler/drombler-jstore-client/releases/latest) (early access release).
 

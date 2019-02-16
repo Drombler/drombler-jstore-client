@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.drombler</groupId>
         <artifactId>drombler-oss-parent</artifactId>
-        <version>3.2-SNAPSHOT</version>
+        <version>3.2</version>
         <relativePath />
     </parent>
     <groupId>org.drombler.jstore.client</groupId>
@@ -99,7 +99,7 @@
             <dependency>
                 <groupId>org.keycloak.bom</groupId>
                 <artifactId>keycloak-adapter-bom</artifactId>
-                <version>4.7.0.Final-SNAPSHOT</version>
+                <version>4.8.3.Final-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
