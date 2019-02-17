@@ -20,7 +20,7 @@
       <RowConstraints vgrow="NEVER" />
    </rowConstraints>
    <children>
-       <HBox fx:id="featureHBox" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
+       <HBox fx:id="applicationFeatureHBox" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
        <LoginButtonPane fx:id="loginButtonPane" GridPane.columnIndex="1" GridPane.hgrow="NEVER" />
    </children>
 </fx:root>

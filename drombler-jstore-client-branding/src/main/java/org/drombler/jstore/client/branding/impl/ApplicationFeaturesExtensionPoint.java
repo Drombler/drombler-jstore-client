@@ -1,16 +1,16 @@
 package org.drombler.jstore.client.branding.impl;
 
 import org.drombler.acp.core.application.ExtensionPoint;
-import org.drombler.jstore.client.branding.jaxb.ApplicationFeatureType;
+import org.drombler.jstore.client.branding.jaxb.ApplicationFeaturesType;
 import org.osgi.service.component.annotations.Component;
 
 
 @Component
-public class ApplicationFeaturesExtensionPoint implements ExtensionPoint<ApplicationFeatureType> {
+public class ApplicationFeaturesExtensionPoint implements ExtensionPoint<ApplicationFeaturesType> {
 
     @Override
-    public Class<ApplicationFeatureType> getJAXBRootClass() {
-        return ApplicationFeatureType.class;
+    public Class<ApplicationFeaturesType> getJAXBRootClass() {
+        return ApplicationFeaturesType.class;
     }
 
 }

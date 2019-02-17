@@ -1,1 +1,2 @@
 org.drombler.jstore.client.branding.impl.DeviceFeatureAnnotationProcessor
+org.drombler.jstore.client.branding.impl.ApplicationFeatureAnnotationProcessor

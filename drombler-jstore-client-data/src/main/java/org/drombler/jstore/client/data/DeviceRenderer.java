@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.branding.impl;
+package org.drombler.jstore.client.data;
 
 import javafx.scene.control.Tooltip;
 import org.drombler.commons.fx.scene.renderer.AbstractDataRenderer;

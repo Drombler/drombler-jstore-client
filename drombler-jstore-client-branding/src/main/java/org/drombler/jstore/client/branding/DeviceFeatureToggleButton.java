@@ -1,8 +1,7 @@
-package org.drombler.jstore.client.branding.impl;
+package org.drombler.jstore.client.branding;
 
 import javafx.scene.Node;
 import org.drombler.commons.fx.scene.control.DataToggleButton;
-import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
 
 public class DeviceFeatureToggleButton extends DataToggleButton<DeviceFeatureDescriptor<? extends Node>> {
 

@@ -15,7 +15,7 @@ public class ManagedComponentsApplicationFeatureToggleAction extends AbstractTog
 
     @Override
     public void onSelectionChanged(boolean oldValue, boolean newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // nothing to do
     }
 
 

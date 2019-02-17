@@ -1,9 +1,8 @@
 package org.drombler.jstore.client.branding;
 
 import java.lang.reflect.InvocationTargetException;
-import static org.drombler.acp.core.commons.util.BundleUtils.loadClass;
-
 import javafx.scene.Node;
+import static org.drombler.acp.core.commons.util.BundleUtils.loadClass;
 import org.drombler.commons.context.ContextInjector;
 import org.drombler.commons.context.ContextManager;
 import org.drombler.commons.context.Contexts;
@@ -64,7 +63,7 @@ public class ApplicationFeatureDescriptor<T extends Node> implements Positionabl
             ContextManager contextManager,
             ContextInjector contextInjector) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         T applicationFeatureContent = createApplicationFeatureContent(applicationFeatureContentClass, contextManager, contextInjector);
-        return new ApplicationFeatureDescriptor<T>(applicationFeature.getActionId(), applicationFeatureContentClass, applicationFeatureContent, applicationFeature.getPosition()); //, deviceFeature.isSelected());
+        return new ApplicationFeatureDescriptor<>(applicationFeature.getActionId(), applicationFeatureContentClass, applicationFeatureContent, applicationFeature.getPosition()); //, deviceFeature.isSelected());
     }
 
     private static <T extends Node> T createApplicationFeatureContent(Class<T> applicationFeatureContentClass, ContextManager contextManager, ContextInjector contextInjector) throws NoSuchMethodException,

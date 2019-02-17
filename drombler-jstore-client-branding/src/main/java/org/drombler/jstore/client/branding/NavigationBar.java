@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.branding.impl;
+package org.drombler.jstore.client.branding;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
-import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
+import org.drombler.jstore.client.data.DeviceToggleButton;
 import org.drombler.jstore.client.data.DeviceHandler;
 
 public class NavigationBar extends GridPane {

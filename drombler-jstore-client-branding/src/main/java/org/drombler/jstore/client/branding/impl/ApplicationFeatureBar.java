@@ -1,16 +1,15 @@
 package org.drombler.jstore.client.branding.impl;
 
+import java.util.Objects;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectPropertyBase;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import org.drombler.commons.action.fx.ButtonUtils;
 import org.drombler.commons.action.fx.FXToggleAction;
 import org.drombler.commons.fx.fxml.FXMLLoaders;
@@ -18,20 +17,19 @@ import org.drombler.commons.fx.scene.control.XToggleButton;
 import org.drombler.jstore.client.branding.ApplicationFeatureDescriptor;
 import org.softsmithy.lib.util.Positionables;
 
-import java.util.Objects;
-
 /**
  *
  * @author puce
  */
-
-
 public class ApplicationFeatureBar extends GridPane {
 
     private ObservableList<ApplicationFeatureDescriptor<?>> applicationFeatures = FXCollections.observableArrayList();
-    private ObservableList<XToggleButton> toggleButtons = FXCollections.observableArrayList();
 
     private final ReadOnlySelectedApplicationFeatureProperty selectedApplicationFeature = new ReadOnlySelectedApplicationFeatureProperty();
+
+    @FXML
+    private HBox applicationFeatureHBox;
+
     @FXML
     private LoginButtonPane loginButtonPane;
 
@@ -41,7 +39,7 @@ public class ApplicationFeatureBar extends GridPane {
         FXMLLoaders.loadRoot(this);
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null){
-                int index = toggleButtons.indexOf(newValue); // TODO: better way
+                int index = applicationFeatureHBox.getChildren().indexOf(newValue); // TODO: better way
                 selectedApplicationFeature.set(applicationFeatures.get(index));
             } else {
                 selectedApplicationFeature.set(null);
@@ -63,7 +61,7 @@ public class ApplicationFeatureBar extends GridPane {
         XToggleButton toggleButton = new XToggleButton();
         ButtonUtils.configureToolbarToggleButton(toggleButton, toggleAction, 24);
         toggleGroup.getToggles().add(toggleButton);
-        toggleButtons.add(insertionPoint, toggleButton);
+        applicationFeatureHBox.getChildren().add(insertionPoint, toggleButton);
 
     }
 

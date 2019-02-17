@@ -10,6 +10,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import org.drombler.commons.client.util.ResourceBundleUtils;
+import org.drombler.jstore.client.branding.NavigationBar;
 import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialogDisplayer;
 import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLogoutDialogDisplayer;
 import org.keycloak.adapters.ServerRequest;
@@ -39,6 +40,8 @@ public class LoginButtonPane extends BorderPane {
 
         this.loginDialogDisplayer = new KeycloakLoginDialogDisplayer(keycloak);
         this.logoutDialogDisplayer = new KeycloakLogoutDialogDisplayer(keycloak);
+
+        setCenter(createLoginLink());
     }
 
     /**
