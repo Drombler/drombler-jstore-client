@@ -9,6 +9,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.drombler.commons.client.util.ResourceBundleUtils;
 import org.drombler.jstore.client.branding.NavigationBar;
 import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialogDisplayer;
@@ -48,16 +49,13 @@ public class LoginButtonPane extends BorderPane {
      * See: https://www.keycloak.org/docs/latest/securing_apps/index.html#_installed_adapter
      *
      * @param event
-     * @throws VerificationException
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ServerRequest.HttpFailure
-     * @throws URISyntaxException
-     * @throws OAuthErrorException
      */
-    public void login(ActionEvent event) throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
+    public void login(ActionEvent event) {
 
         boolean loginSuccessful = loginDialogDisplayer.showLoginDialog(getScene().getWindow());
+        ((Stage)getScene().getWindow()).toFront();
+        getScene().getWindow().requestFocus();
+        LOGGER.debug("To front");
 
         if (loginSuccessful) {
             setCenter(createMenuButton());
@@ -66,14 +64,20 @@ public class LoginButtonPane extends BorderPane {
 
 // ensure token is valid for at least 30 seconds
             long minValidity = 30L;
-            String tokenString = keycloak.getTokenString(minValidity, TimeUnit.SECONDS);
+            try {
+                String  tokenString = keycloak.getTokenString(minValidity, TimeUnit.SECONDS);
             System.out.println(tokenString);
+            } catch (VerificationException |IOException |ServerRequest.HttpFailure e) {
+                LOGGER.error(e.getMessage(), e);
+            }
         }
     }
 
     private void logout(ActionEvent event) throws VerificationException, IOException, ServerRequest.HttpFailure, InterruptedException, URISyntaxException {
         setCenter(createLoginLink());
         boolean logoutSuccessful = logoutDialogDisplayer.showLogoutDialog(getScene().getWindow());
+        ((Stage)getScene().getWindow()).toFront();
+        getScene().getWindow().requestFocus();
 
         if (logoutSuccessful) {
             System.out.println("logged out!");
@@ -82,13 +86,7 @@ public class LoginButtonPane extends BorderPane {
 
     private Hyperlink createLoginLink() {
         Hyperlink loginLink = new Hyperlink(ResourceBundleUtils.getClassResourceStringPrefixed(LoginButtonPane.class, "%loginLink.text"));
-        loginLink.setOnAction(e -> {
-            try {
-                login(e);
-            } catch (VerificationException | IOException | ServerRequest.HttpFailure | InterruptedException | URISyntaxException ex) {
-                LOGGER.error(ex.getMessage(), ex);
-            }
-        });
+        loginLink.setOnAction(this::login);
         return loginLink;
     }
 

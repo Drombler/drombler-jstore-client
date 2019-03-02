@@ -75,7 +75,7 @@ public class NavigationBar extends GridPane {
         return deviceToggleGroup.selectedToggleProperty();
     }
 
-    public ReadOnlyObjectProperty<Toggle> selectedFeatureToggleProperty() {
+    public ReadOnlyObjectProperty<Toggle> selectedDeviceFeatureToggleProperty() {
         return deviceFeatureToggleGroup.selectedToggleProperty();
     }
 
