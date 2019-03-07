@@ -15,7 +15,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class ManagedComponentContentPaneProvider implements NavigationBarProvider {
+public class ManagedComponentContentPaneProvider {
 
 //    private final ManagedComponentsApplicationFeaturePane contentPane = new ManagedComponentsApplicationFeaturePane();
 
@@ -24,6 +24,9 @@ public class ManagedComponentContentPaneProvider implements NavigationBarProvide
 
     @Reference
     private DeviceHandlerListProvider deviceHandlerListProvider;
+
+    @Reference
+    private NavigationBarProvider navigationBarProvider;
 
 //    private ContextInjector contextInjector;
 
@@ -55,9 +58,8 @@ public class ManagedComponentContentPaneProvider implements NavigationBarProvide
         Bindings.unbindContentBidirectional(getNavigationBar().getDevices(), deviceHandlerListProvider.getDeviceHandlers());
     }
 
-    @Override
-    public NavigationBar getNavigationBar() {
-        return contentPane.getNavigationBar();
+    private NavigationBar getNavigationBar() {
+        return navigationBarProvider.getNavigationBar();
     }
 
 }

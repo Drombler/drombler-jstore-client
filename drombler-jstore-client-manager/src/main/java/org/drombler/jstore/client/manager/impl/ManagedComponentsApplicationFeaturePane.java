@@ -12,13 +12,14 @@ import org.drombler.commons.fx.fxml.FXMLLoaders;
 import org.drombler.jstore.client.branding.ApplicationFeature;
 import org.drombler.jstore.client.branding.DeviceFeatureToggleButton;
 import org.drombler.jstore.client.branding.NavigationBar;
+import org.drombler.jstore.client.branding.NavigationBarProvider;
 import static org.drombler.jstore.client.manager.impl.ManagedComponentsApplicationFeatureToggleAction.ID;
 
 /**
  * @author puce
  */
-@ApplicationFeature(actionId = ID, position = 10)
-public class ManagedComponentsApplicationFeaturePane extends BorderPane implements LocalContextProvider {
+@ApplicationFeature(actionId = ID, position = 10, serviceProviderInterfaces = {NavigationBarProvider.class})
+public class ManagedComponentsApplicationFeaturePane extends BorderPane implements LocalContextProvider, NavigationBarProvider {
 
     private final ProxyContext activeSelectionProxyContext = new ProxyContext();
     private final Context activeSelectionProxyContextWrapper = new ContextWrapper(activeSelectionProxyContext);
@@ -62,6 +63,7 @@ public class ManagedComponentsApplicationFeaturePane extends BorderPane implemen
         });
     }
 
+    @Override
     public NavigationBar getNavigationBar() {
         return navigationBar;
     }
