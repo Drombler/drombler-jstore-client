@@ -32,6 +32,13 @@ Contributor(s): .
             <element name="actionId" type="string"/>
             <element name="position" type="int"/>
             <!--<element name="selected" type="boolean" default="false"/>-->
+            <element name="serviceProviderInterfaceClasses" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="serviceProviderInterfaceClass" type="string" maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
             <element name="applicationFeatureContentClass" type="string"/>
         </sequence>
     </complexType>

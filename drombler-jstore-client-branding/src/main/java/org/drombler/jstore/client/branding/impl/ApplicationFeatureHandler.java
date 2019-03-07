@@ -1,8 +1,9 @@
 package org.drombler.jstore.client.branding.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.Node;
-import javafx.scene.control.ToggleGroup;
-import org.drombler.acp.core.action.PositionableMenuItemAdapter;
 import org.drombler.acp.core.action.spi.ActionRegistry;
 import org.drombler.acp.core.action.spi.ActionResolutionManager;
 import org.drombler.acp.core.action.spi.ToggleActionDescriptor;
@@ -11,7 +12,6 @@ import org.drombler.acp.core.commons.util.concurrent.ApplicationThreadExecutorPr
 import org.drombler.acp.core.context.ContextManagerProvider;
 import org.drombler.commons.action.fx.FXToggleAction;
 import org.drombler.commons.context.ContextInjector;
-import org.drombler.jstore.client.branding.ApplicationFeature;
 import org.drombler.jstore.client.branding.ApplicationFeatureDescriptor;
 import org.drombler.jstore.client.branding.jaxb.ApplicationFeatureType;
 import org.drombler.jstore.client.branding.jaxb.ApplicationFeaturesType;
@@ -23,15 +23,10 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.softsmithy.lib.util.PositionableAdapter;
-import org.softsmithy.lib.util.Positionables;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class ApplicationFeatureHandler {
+
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationFeatureHandler.class);
     private final List<UnresolvedEntry<ApplicationFeatureDescriptor<? extends Node>>> unresolvedApplicationFeatureDescriptors = new ArrayList<>();
     private final List<UnresolvedEntry<ApplicationFeatureType>> unresolvedApplicationFeatures = new ArrayList<>();
@@ -110,11 +105,11 @@ public class ApplicationFeatureHandler {
                         // TODO ???
                     }
 
-                    @Override
-                    public void removedService(ServiceReference<FXToggleAction> reference, ServiceReference<FXToggleAction> service) {
-                        // TODO ???
-                    }
-                });
+            @Override
+            public void removedService(ServiceReference<FXToggleAction> reference, ServiceReference<FXToggleAction> service) {
+                // TODO ???
+            }
+        });
     }
 
     private void registerApplicationFeatures(ApplicationFeaturesType applicationFeatures, BundleContext context) {
@@ -130,15 +125,22 @@ public class ApplicationFeatureHandler {
         }
     }
 
-
     private void registerApplicationFeatureInitialized(ApplicationFeatureType applicationFeature, BundleContext context) {
         try {
             ApplicationFeatureDescriptor<?> applicationFeatureDescriptor = ApplicationFeatureDescriptor.createApplicationFeatureDescriptor(applicationFeature, contextManagerProvider.
                     getContextManager(), contextInjector, context.getBundle());
             context.registerService(ApplicationFeatureDescriptor.class, applicationFeatureDescriptor, null);
+
+            applicationFeatureDescriptor.getServiceProviderInterfaceClasses().forEach(serviceProviderInterfaceClass
+                    -> registerServiceProviderInterface(context, serviceProviderInterfaceClass, applicationFeatureDescriptor.getApplicationFeatureContent())
+            );
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ex) {
             LOG.error(ex.getMessage(), ex);
         }
+    }
+
+    private <T> void registerServiceProviderInterface(BundleContext context, Class<T> serviceProviderInterfaceClass, Object serviceProviderInterface) {
+        context.registerService(serviceProviderInterfaceClass, serviceProviderInterfaceClass.cast(serviceProviderInterface), null);
     }
 
     private void registerApplicationFeature(UnresolvedEntry<ApplicationFeatureDescriptor<? extends Node>> unresolvedEntry) {
@@ -166,7 +168,6 @@ public class ApplicationFeatureHandler {
             applicationFeatureBar.addApplicationFeatures(applicationFeatureDescriptor, toggleAction);
         });
     }
-
 
     private void resolveUnresolvedApplicationFeatureDescriptors() {
         List<UnresolvedEntry<ApplicationFeatureDescriptor<? extends Node>>> unresolvedApplicationFeatureDescriptorsCopy = new ArrayList<>(unresolvedApplicationFeatureDescriptors);

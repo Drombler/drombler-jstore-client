@@ -12,5 +12,7 @@ public @interface ApplicationFeature {
      */
     int position();
 
+    Class<?>[] serviceProviderInterfaces() default {};
+
 //    boolean selected() default false;
 }
