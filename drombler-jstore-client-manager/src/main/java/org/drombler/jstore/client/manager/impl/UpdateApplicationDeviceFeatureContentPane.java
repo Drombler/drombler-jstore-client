@@ -1,5 +1,7 @@
 package org.drombler.jstore.client.manager.impl;
 
+import java.util.List;
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
@@ -15,21 +17,19 @@ import org.drombler.jstore.protocol.json.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.Objects;
-
 @DeviceFeature(displayName = "%displayName", position = 50, selected = true)
-public class UpdateJreFeatureContentPane extends BorderPane implements ActiveContextSensitive {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateJreFeatureContentPane.class);
+public class UpdateApplicationDeviceFeatureContentPane extends BorderPane implements ActiveContextSensitive {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(UpdateApplicationDeviceFeatureContentPane.class);
     private Context activeContext;
     private DeviceHandler device;
 
     @FXML
-    private ListView<UpgradableJRE> updateListView;
+    private ListView<UpgradableApplication> updateListView;
 
-    public UpdateJreFeatureContentPane() {
+    public UpdateApplicationDeviceFeatureContentPane() {
         FXMLLoaders.loadRoot(this);
-        updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableJreRenderer()));
+        updateListView.setCellFactory(new RenderedListCellFactory<>(new UpgradableApplicationRenderer()));
     }
 
     @Override
@@ -55,18 +55,22 @@ public class UpdateJreFeatureContentPane extends BorderPane implements ActiveCon
     }
 
     private void refreshUpdateListView() {
-        List<SelectedJRE> selectedJREs = device.getJStoreClientAgentSocketClient().getSelectedJREs();
-        LOGGER.debug("SelectedJREs: {}", selectedJREs);
+        List<SelectedApplication> selectedApplications = device.getJStoreClientAgentSocketClient().getSelectedApplications();
+        LOGGER.debug("SelectedApplications: {}", selectedApplications);
         List<StoreRestClient> storeRestClients = device.getStoreRestClients();
         storeRestClients.forEach(storeRestClient -> {
-            JreVersionSearchRequest request = new JreVersionSearchRequest();
-            request.setSelectedJREs(selectedJREs);
+            ApplicationVersionSearchRequest request = new ApplicationVersionSearchRequest();
+            request.setSelectedApplications(selectedApplications);
             request.setSystemInfo(device.getJStoreClientAgentSocketClient().getSystemInfo());
-            // TODO: split per store
-            JreVersionSearchResponse response = storeRestClient.startJreVersionSearch(request);
-            List<UpgradableJRE> upgradableJREs = response.getUpgradableJREs();
-            LOGGER.debug("UpgradableJREs: {}", upgradableJREs);
-            updateListView.getItems().addAll(upgradableJREs);
+            try {
+                // TODO: split per store
+                ApplicationVersionSearchResponse response = storeRestClient.startApplicationVersionSearch(request);
+                List<UpgradableApplication> upgradableApplications = response.getUpgradableApplications();
+                LOGGER.debug("UpgradableApplications: {}", upgradableApplications);
+                updateListView.getItems().addAll(upgradableApplications);
+            } catch (RuntimeException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
         });
     }
 

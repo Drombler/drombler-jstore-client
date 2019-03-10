@@ -6,6 +6,8 @@ import org.drombler.acp.core.commons.util.concurrent.ApplicationThreadExecutorPr
 import org.drombler.acp.core.context.ContextManagerProvider;
 import org.drombler.commons.context.ContextInjector;
 import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
+import org.drombler.jstore.client.branding.NavigationBar;
+import org.drombler.jstore.client.branding.NavigationBarProvider;
 import org.drombler.jstore.client.branding.jaxb.DeviceFeatureType;
 import org.drombler.jstore.client.branding.jaxb.DeviceFeaturesType;
 import org.osgi.framework.BundleContext;
@@ -105,8 +107,8 @@ public class DeviceFeatureHandler {
     private <T extends Node> void registerDeviceFeatureInitialized(DeviceFeatureDescriptor<T> deviceFeatureDescriptor) {
         applicationThreadExecutorProvider.getApplicationThreadExecutor().execute(() -> {
             NavigationBar navigationBar = navigationBarProvider.getNavigationBar();
-            int insertionPoint = Positionables.getInsertionPoint(navigationBar.getFeatures(), deviceFeatureDescriptor);
-            navigationBar.getFeatures().add(insertionPoint, deviceFeatureDescriptor);
+            int insertionPoint = Positionables.getInsertionPoint(navigationBar.getDeviceFeatures(), deviceFeatureDescriptor);
+            navigationBar.getDeviceFeatures().add(insertionPoint, deviceFeatureDescriptor);
         });
     }
 

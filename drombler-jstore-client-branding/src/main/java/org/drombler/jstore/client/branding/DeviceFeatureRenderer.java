@@ -1,7 +1,6 @@
-package org.drombler.jstore.client.branding.impl;
+package org.drombler.jstore.client.branding;
 
 import org.drombler.commons.fx.scene.renderer.AbstractDataRenderer;
-import org.drombler.jstore.client.branding.DeviceFeatureDescriptor;
 
 public class DeviceFeatureRenderer extends AbstractDataRenderer<DeviceFeatureDescriptor<?>> {
 

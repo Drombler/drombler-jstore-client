@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
-<?import org.drombler.jstore.client.branding.impl.ApplicationFeatureBar?>
+<?import org.drombler.jstore.client.branding.NavigationBar?>
 <fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <top>
-        <ApplicationFeatureBar fx:id="applicationFeatureBar"/>
+        <NavigationBar fx:id="navigationBar"/>
     </top>
 </fx:root>

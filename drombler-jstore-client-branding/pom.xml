@@ -40,6 +40,18 @@
                                 ${project.build.resources[0].directory}/org/drombler/jstore/client/branding/jaxb
                             </schemaDirectory>
                             <generatePackage>org.drombler.jstore.client.branding.jaxb</generatePackage>
+                            <extension>true</extension>
+                            <args>
+                                <arg>-Xxew</arg>
+                                <arg>-Xxew:instantiate lazy</arg>
+                            </args>
+                            <plugins>
+                                <plugin>
+                                    <groupId>com.github.jaxb-xew-plugin</groupId>
+                                    <artifactId>jaxb-xew-plugin</artifactId>
+                                    <version>1.10</version>
+                                </plugin>
+                            </plugins>
                         </configuration>
                     </execution>
                 </executions>

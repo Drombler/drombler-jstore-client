@@ -22,7 +22,7 @@ Contributor(s): .
 <?import org.drombler.fx.core.action.*?>
 
 <?import org.drombler.jstore.client.branding.impl.StoreContentPane?>
-<?import org.drombler.jstore.client.branding.impl.NavigationBar?>
+<?import org.drombler.jstore.client.branding.NavigationBar?>
 <fx:root type="GridPane" xmlns:fx="http://javafx.com/fxml">
     <MenuBar GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" fx:id="menuBar"/>
     <BorderPane GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" fx:id="contentPane"/>

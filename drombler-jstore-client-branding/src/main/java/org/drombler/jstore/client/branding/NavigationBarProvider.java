@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.branding.impl;
+package org.drombler.jstore.client.branding;
 
 public interface NavigationBarProvider {
     NavigationBar getNavigationBar();

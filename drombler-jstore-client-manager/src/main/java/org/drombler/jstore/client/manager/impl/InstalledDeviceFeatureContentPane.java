@@ -12,13 +12,13 @@ import org.drombler.jstore.client.data.DeviceHandler;
 import java.util.Objects;
 
 @DeviceFeature(displayName = "%displayName", position = 10)
-public class InstalledFeatureContentPane extends BorderPane implements ActiveContextSensitive {
+public class InstalledDeviceFeatureContentPane extends BorderPane implements ActiveContextSensitive {
     private Context activeContext;
     private DeviceHandler device;
 
     private ListView<Object> listView;
 
-    public InstalledFeatureContentPane() {
+    public InstalledDeviceFeatureContentPane() {
         FXMLLoaders.loadRoot(this);
     }
 

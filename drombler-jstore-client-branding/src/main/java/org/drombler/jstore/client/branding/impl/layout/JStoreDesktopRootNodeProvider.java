@@ -1,21 +1,15 @@
 package org.drombler.jstore.client.branding.impl.layout;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.ListChangeListener;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.Toggle;
-import org.drombler.acp.core.action.spi.ApplicationToolBarContainerProvider;
 import org.drombler.acp.core.action.spi.MenuBarMenuContainerProvider;
 import org.drombler.acp.core.action.spi.MenuMenuItemContainerFactory;
 import org.drombler.acp.core.action.spi.SeparatorMenuItemFactory;
 import org.drombler.acp.core.context.ContextManagerProvider;
 import org.drombler.acp.core.status.spi.StatusBarElementContainerProvider;
 import org.drombler.fx.core.application.MainSceneRootProvider;
-import org.drombler.jstore.client.branding.impl.DeviceFeatureToggleButton;
-import org.drombler.jstore.client.branding.impl.DeviceToggleButton;
 import org.drombler.jstore.client.data.DeviceHandlerListProvider;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
