@@ -1,5 +1,7 @@
 package org.drombler.jstore.client.manager.impl;
 
+import java.util.List;
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
@@ -15,11 +17,9 @@ import org.drombler.jstore.protocol.json.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.Objects;
-
 @DeviceFeature(displayName = "%displayName", position = 50, selected = true)
 public class UpdateApplicationDeviceFeatureContentPane extends BorderPane implements ActiveContextSensitive {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(UpdateApplicationDeviceFeatureContentPane.class);
     private Context activeContext;
     private DeviceHandler device;
@@ -62,11 +62,15 @@ public class UpdateApplicationDeviceFeatureContentPane extends BorderPane implem
             ApplicationVersionSearchRequest request = new ApplicationVersionSearchRequest();
             request.setSelectedApplications(selectedApplications);
             request.setSystemInfo(device.getJStoreClientAgentSocketClient().getSystemInfo());
-            // TODO: split per store
-            ApplicationVersionSearchResponse response = storeRestClient.startApplicationVersionSearch(request);
-            List<UpgradableApplication> upgradableApplications = response.getUpgradableApplications();
-            LOGGER.debug("UpgradableApplications: {}", upgradableApplications);
-            updateListView.getItems().addAll(upgradableApplications);
+            try {
+                // TODO: split per store
+                ApplicationVersionSearchResponse response = storeRestClient.startApplicationVersionSearch(request);
+                List<UpgradableApplication> upgradableApplications = response.getUpgradableApplications();
+                LOGGER.debug("UpgradableApplications: {}", upgradableApplications);
+                updateListView.getItems().addAll(upgradableApplications);
+            } catch (RuntimeException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
         });
     }
 
