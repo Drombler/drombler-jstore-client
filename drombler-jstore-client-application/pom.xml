@@ -80,6 +80,13 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-vendor</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>drombler-jstore-client-jap-support</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
@@ -89,15 +96,6 @@
             <!-- Configures the provided content of the JavaFX Application. -->
             <groupId>org.drombler.fx</groupId>
             <artifactId>drombler-fx-core-application</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <!--  Provides a classic desktop application layout with a menubar, a toolbar, a status bar and a content area 
-            as the content of the JavaFX Application. 
-            You could replace this with your own definition of the application layout by providing an implementation
-            of MainSceneRootProvider and registering it as an OSGi service. -->
-            <groupId>org.drombler.fx</groupId>
-            <artifactId>drombler-fx-core-standard-desktop-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>

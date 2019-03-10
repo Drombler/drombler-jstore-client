@@ -55,5 +55,6 @@
         <module>drombler-jstore-client-manager</module>
         <module>drombler-jstore-client-discovery</module>
         <module>drombler-jstore-client-jap-support</module>
-    </modules>
+        <module>drombler-jstore-client-vendor</module>
+  </modules>
 </project>
