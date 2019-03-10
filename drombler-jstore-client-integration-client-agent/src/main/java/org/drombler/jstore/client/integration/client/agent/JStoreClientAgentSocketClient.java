@@ -34,8 +34,8 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
         Store store = new Store();
         store.setId("jstore");
         store.setDisplayName("Drombler JStore");
-//        store.setEndpoint("http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/webresources");
-        store.setEndpoint("http://localhost:5000/webresources");
+        store.setEndpoint("http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/api");
+//        store.setEndpoint("http://localhost:5000/api");
         List<Store> stores = new ArrayList<>();
         stores.add(store);
         return stores;
