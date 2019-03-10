@@ -15,7 +15,7 @@ import org.drombler.jstore.client.branding.NavigationBar;
 import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLoginDialogDisplayer;
 import org.drombler.jstore.client.branding.impl.keycloak.KeycloakLogoutDialogDisplayer;
 import org.keycloak.adapters.ServerRequest;
-import org.keycloak.adapters.installed.desktop.KeycloakInstalledDesktop;
+import org.keycloak.adapters.installed.KeycloakInstalled;
 import org.keycloak.common.VerificationException;
 import org.keycloak.representations.AccessToken;
 import org.slf4j.Logger;
@@ -30,13 +30,13 @@ import org.slf4j.LoggerFactory;
 public class LoginButtonPane extends BorderPane {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginButtonPane.class);
 
-    private final KeycloakInstalledDesktop keycloak;
+    private final KeycloakInstalled keycloak;
     private final KeycloakLoginDialogDisplayer loginDialogDisplayer;
     private final KeycloakLogoutDialogDisplayer logoutDialogDisplayer;
 
     public LoginButtonPane() {
         // reads the configuration from classpath: META-INF/keycloak.json
-        this.keycloak = new KeycloakInstalledDesktop(NavigationBar.class.getResourceAsStream("/META-INF/keycloak.json"));
+        this.keycloak = new KeycloakInstalled(NavigationBar.class.getResourceAsStream("/META-INF/keycloak.json"));
         this.keycloak.setLocale(Locale.getDefault(Locale.Category.DISPLAY));
 
         this.loginDialogDisplayer = new KeycloakLoginDialogDisplayer(keycloak);

@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.Window;
-import org.keycloak.adapters.installed.desktop.KeycloakInstalledDesktop;
+import org.keycloak.adapters.installed.KeycloakInstalled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,14 +25,14 @@ public class KeycloakLoginDialogDisplayer {
         return thread;
     });
 
-    private final KeycloakInstalledDesktop keycloakInstalledDesktop;
+    private final KeycloakInstalled keycloakInstalled;
 
-    public KeycloakLoginDialogDisplayer(KeycloakInstalledDesktop keycloakInstalledDesktop) {
-        this.keycloakInstalledDesktop = keycloakInstalledDesktop;
+    public KeycloakLoginDialogDisplayer(KeycloakInstalled keycloakInstalled) {
+        this.keycloakInstalled = keycloakInstalled;
     }
 
     public boolean showLoginDialog(Window owner) {
-        KeycloakLoginTask keycloakLoginTask = new KeycloakLoginTask(keycloakInstalledDesktop);
+        KeycloakLoginTask keycloakLoginTask = new KeycloakLoginTask(keycloakInstalled);
         Dialog<ButtonType> dialog = createKeycloakLoginDialog(owner, keycloakLoginTask);
 
         keycloakLoginTask.setOnSucceeded(event -> {
