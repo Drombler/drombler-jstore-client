@@ -1,7 +1,7 @@
-package org.drombler.jstore.client.manager.impl;
+package org.drombler.jstore.client.store.impl;
 
 import org.drombler.fx.startup.main.DromblerFXConfiguration;
-import org.drombler.jstore.client.manager.StoreManager;
+import org.drombler.jstore.client.store.StoreManager;
 import org.drombler.jstore.protocol.StoreRegistry;
 import org.drombler.jstore.protocol.json.Store;
 import org.osgi.service.component.ComponentContext;

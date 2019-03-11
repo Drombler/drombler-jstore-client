@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.manager;
+package org.drombler.jstore.client.store;
 
 import org.drombler.jstore.protocol.json.Store;
 

@@ -1,6 +1,12 @@
 package org.drombler.jstore.client.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanPropertyBase;
@@ -10,19 +16,11 @@ import org.drombler.acp.core.data.AbstractDataHandler;
 import org.drombler.acp.core.data.BusinessObjectHandler;
 import org.drombler.jstore.client.integration.client.agent.JStoreClientAgentSocketClient;
 import org.drombler.jstore.client.integration.store.StoreRestClient;
-import org.drombler.jstore.client.integration.store.StoreRestClientRegistry;
 import org.drombler.jstore.client.model.json.DeviceConfiguration;
-import org.drombler.jstore.protocol.json.Store;
-import org.drombler.jstore.protocol.json.SystemInfo;
+import org.drombler.jstore.client.store.StoreHandler;
+import org.drombler.jstore.client.store.StoreHandlerRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @BusinessObjectHandler
 public class DeviceHandler extends AbstractDataHandler<String> {
@@ -30,16 +28,16 @@ public class DeviceHandler extends AbstractDataHandler<String> {
 
     private final DeviceConfiguration deviceConfiguration;
     private final ObjectMapper objectMapper;
-    private final StoreRestClientRegistry storeRestClientRegistry;
+    private final StoreHandlerRegistry storeHandlerRegistry;
     private final BooleanProperty modified = new SimpleBooleanProperty(this, "modified", false);
     private final ConnectedProperty connected = new ConnectedProperty();
     private JStoreClientAgentSocketClient jStoreClientAgentSocketClient;
-    private Map<String, Store> stores = new HashMap<>();
+    private Map<String, StoreHandler> stores = new HashMap<>();
 
-    public DeviceHandler(DeviceConfiguration deviceConfiguration, ObjectMapper objectMapper, StoreRestClientRegistry storeRestClientRegistry) {
+    public DeviceHandler(DeviceConfiguration deviceConfiguration, ObjectMapper objectMapper, StoreHandlerRegistry storeHandlerRegistry) {
         this.deviceConfiguration = deviceConfiguration;
         this.objectMapper = objectMapper;
-        this.storeRestClientRegistry = storeRestClientRegistry;
+        this.storeHandlerRegistry = storeHandlerRegistry;
         if (StringUtils.isBlank(deviceConfiguration.getId())) {
             deviceConfiguration.setId(UUID.randomUUID().toString());
             setModified(true);
@@ -47,10 +45,11 @@ public class DeviceHandler extends AbstractDataHandler<String> {
         connected.addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 jStoreClientAgentSocketClient.getStores().stream()
-                        .filter(store -> !stores.containsKey(store.getEndpoint()))
-                        .forEach(store -> {
-                            stores.put(store.getEndpoint(), store);
-                            this.storeRestClientRegistry.registerStore(store, getUniqueKey());
+                        .map(StoreHandler::new)
+                        .filter(storeHandler -> !stores.containsKey(storeHandler.getUniqueKey()))
+                        .forEach(storeHandler -> {
+                    storeHandler = this.storeHandlerRegistry.registerStoreHandler(storeHandler, getUniqueKey());
+                            stores.put(storeHandler.getUniqueKey(), storeHandler);
                         });
             }
         });
@@ -86,18 +85,18 @@ public class DeviceHandler extends AbstractDataHandler<String> {
 
     public List<StoreRestClient> getStoreRestClients() {
         return stores.values().stream()
-                .map(storeRestClientRegistry::getStoreRestClient)
+                .map(StoreHandler::getStoreRestClient)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void close() {
+    protected void doClose() {
         try {
             jStoreClientAgentSocketClient.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | RuntimeException e) {
+            LOGGER.error(e.getMessage(), e);
         }
-        stores.forEach((s, store) -> storeRestClientRegistry.unregisterStore(store, getUniqueKey()));
+        stores.forEach((s, store) -> storeHandlerRegistry.unregisterStoreHandler(store, getUniqueKey()));
         super.close();
     }
 
@@ -132,7 +131,7 @@ public class DeviceHandler extends AbstractDataHandler<String> {
         return connectedProperty().get();
     }
 
-    private final void setConnected(boolean connected) {
+    private void setConnected(boolean connected) {
         this.connected.set(connected);
     }
 

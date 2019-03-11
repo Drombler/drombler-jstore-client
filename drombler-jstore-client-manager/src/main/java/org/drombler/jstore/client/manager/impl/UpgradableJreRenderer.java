@@ -1,7 +1,6 @@
 package org.drombler.jstore.client.manager.impl;
 
 import org.drombler.commons.fx.scene.renderer.AbstractDataRenderer;
-import org.drombler.jstore.protocol.json.UpgradableApplication;
 import org.drombler.jstore.protocol.json.UpgradableJRE;
 
 /**

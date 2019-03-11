@@ -15,7 +15,6 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
 
     public JStoreClientAgentSocketClient(String host, int port, ObjectMapper objectMapper) throws IOException {
         try {
-
             this.socket = new Socket(host, port);
             this.writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
         } catch (IOException | IllegalArgumentException ex) {
@@ -34,8 +33,8 @@ public class JStoreClientAgentSocketClient implements AutoCloseable {
         Store store = new Store();
         store.setId("jstore");
         store.setDisplayName("Drombler JStore");
-        store.setEndpoint("http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/api");
-//        store.setEndpoint("http://localhost:5000/api");
+//        store.setEndpoint("http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/api");
+        store.setEndpoint("http://localhost:5000/api");
         List<Store> stores = new ArrayList<>();
         stores.add(store);
         return stores;

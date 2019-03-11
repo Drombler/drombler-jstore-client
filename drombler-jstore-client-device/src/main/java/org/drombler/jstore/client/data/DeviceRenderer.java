@@ -2,7 +2,6 @@ package org.drombler.jstore.client.data;
 
 import javafx.scene.control.Tooltip;
 import org.drombler.commons.fx.scene.renderer.AbstractDataRenderer;
-import org.drombler.jstore.client.data.DeviceHandler;
 
 public class DeviceRenderer extends AbstractDataRenderer<DeviceHandler> {
     private final Tooltip tooltip = new Tooltip();

@@ -1,4 +1,4 @@
-package org.drombler.jstore.client.data;
+package org.drombler.jstore.client.data.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import org.drombler.acp.core.data.spi.DataHandlerRegistryProvider;
 import org.drombler.commons.fx.beans.binding.CollectionBindings;
 import org.drombler.fx.startup.main.DromblerFXConfiguration;
-import org.drombler.jstore.client.integration.store.StoreRestClientRegistryProvider;
 import org.drombler.jstore.client.model.ObjectMapperProvider;
 import org.drombler.jstore.client.model.json.DeviceConfigurations;
 import org.osgi.service.component.ComponentContext;
@@ -20,6 +19,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.drombler.jstore.client.data.DeviceHandler;
+import org.drombler.jstore.client.data.DeviceHandlerListProvider;
+import org.drombler.jstore.client.store.StoreHandlerRegistryProvider;
 
 
 //@DocumentHandler(mimeType = DEVICE_CONFIGURATIONS_MIME_TYPE)
@@ -32,7 +34,7 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
     @Reference
     private ObjectMapperProvider objectMapperProvider;
     @Reference
-    private StoreRestClientRegistryProvider storeRestClientRegistryProvider;
+    private StoreHandlerRegistryProvider storeRestClientRegistryProvider;
     @Reference
     private DataHandlerRegistryProvider dataHandlerRegistryProvider;
 
@@ -97,7 +99,7 @@ public class DeviceConfigurationsFileHandler implements DeviceHandlerListProvide
     private List<DeviceHandler> getInitialDeviceList() {
         return this.deviceConfigurations.getDeviceConfigurations().stream()
                 .map(deviceConfiguration -> {
-                    DeviceHandler deviceHandler = new DeviceHandler(deviceConfiguration, objectMapperProvider.getObjectMapper(), storeRestClientRegistryProvider.getStoreRestClientRegistry());
+                    DeviceHandler deviceHandler = new DeviceHandler(deviceConfiguration, objectMapperProvider.getObjectMapper(), storeRestClientRegistryProvider.getStoreHandlerRegistry());
                     dataHandlerRegistryProvider.getDataHandlerRegistry().registerDataHandler(deviceHandler);
                     return deviceHandler;
                 })

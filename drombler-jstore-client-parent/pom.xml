@@ -68,7 +68,7 @@
 
         <drombler-fx.version>0.14-SNAPSHOT</drombler-fx.version>
         <jap-maven-plugin.version>0.2-SNAPSHOT</jap-maven-plugin.version>
-        <drombler-jstore-protocol.version>0.4-SNAPSHOT</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.5-SNAPSHOT</drombler-jstore-protocol.version>
         <feign.version>10.0.1</feign.version>
     </properties>
     

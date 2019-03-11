@@ -7,10 +7,10 @@
         <version>0.2-SNAPSHOT</version>
         <relativePath>../drombler-jstore-client-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>drombler-jstore-client-data</artifactId>
+    <artifactId>drombler-jstore-client-device</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Drombler JStore Client - Data</name>
+    <name>Drombler JStore Client - Device</name>
 
     <!-- Not inherited!?? -->
     <prerequisites>
@@ -36,6 +36,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>drombler-jstore-client-integration-client-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-store</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
