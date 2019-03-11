@@ -28,11 +28,16 @@
     </build>
 
     <dependencies>
-        <!--        <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>drombler-jstore-client-branding</artifactId>
             <version>${project.version}</version>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-client-store</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>drombler-jstore-client-integration-jstore</artifactId>
@@ -64,11 +69,12 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-        <!--        <dependency>
+        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.service.component.annotations</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.drombler.fx</groupId>
             <artifactId>drombler-fx-startup-main</artifactId>

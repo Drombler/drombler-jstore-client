@@ -51,25 +51,30 @@ public class VendorInfoHandler extends AbstractDataHandler<String> {
         newVendorInfo = false;
     }
 
+    public void save() {
+        normalize();
+        // TODO: call client
+    }
+
     public VendorInfo getVendorInfo() {
         return vendorInfo;
     }
-    
-    private void normalize(){
+
+    private void normalize() {
         vendorInfo.setVendorId(StringUtils.trimToNull(vendorInfo.getVendorId()));
         vendorInfo.setName(StringUtils.trimToNull(vendorInfo.getName()));
         vendorInfo.setRegistrationEmailAddress(StringUtils.trimToNull(vendorInfo.getRegistrationEmailAddress()));
         vendorInfo.setCustomerContactEmailAddress(StringUtils.trimToNull(vendorInfo.getCustomerContactEmailAddress()));
-        
-        for (ListIterator<String> iterator = vendorInfo.getNamespaces().listIterator(); iterator.hasNext();){
+
+        for (ListIterator<String> iterator = vendorInfo.getNamespaces().listIterator(); iterator.hasNext();) {
             String namespace = StringUtils.trimToNull(iterator.next());
-            if (namespace != null){
+            if (namespace != null) {
                 iterator.set(namespace);
             } else {
                 iterator.remove();
             }
         }
-        
+
         vendorInfo.setNamespaces(new ArrayList<>(new LinkedHashSet<>(vendorInfo.getNamespaces())));
     }
 
