@@ -97,7 +97,7 @@ public class DeviceHandler extends AbstractDataHandler<String> {
             LOGGER.error(e.getMessage(), e);
         }
         stores.forEach((s, store) -> storeHandlerRegistry.unregisterStoreHandler(store, getUniqueKey()));
-        super.close();
+        super.doClose();
     }
 
     @Override
