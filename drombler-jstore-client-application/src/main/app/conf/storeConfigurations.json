@@ -1,0 +1,17 @@
+{
+  "stores": [
+    {
+      "store": {
+        "id": "jstore",
+        "displayName": "JStore",
+        "endpoint": "http://localhost:5000/api",
+        "keycloak-client-config": {
+          "auth-server-url": "http://localhost:8070/auth",
+          "realm": "drombler-staging",
+          "resource": "jstore-client",
+          "ssl-required": "external"
+        }
+      }
+    }
+  ]
+}
