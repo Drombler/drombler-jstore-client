@@ -83,5 +83,9 @@
             <version>0.2-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-installed-adapter</artifactId>
+        </dependency>
     </dependencies>
 </project>
